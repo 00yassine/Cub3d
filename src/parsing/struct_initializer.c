@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_twodarr.c                                    :+:      :+:    :+:   */
+/*   struct_initializer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/15 17:12:25 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/08/15 17:15:45 by ykabili-         ###   ########.fr       */
+/*   Created: 2025/08/15 17:12:47 by ykabili-          #+#    #+#             */
+/*   Updated: 2025/08/15 17:12:48 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	print_twodarr(char **map)
+void	struct_initializer(t_map *map)
 {
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		printf("%s", map[i]);
-		i++;
-	}
+	map->ele.no = 0;
+	map->ele.so = 0;
+	map->ele.we = 0;
+	map->ele.ea = 0;
+	map->ele.f = 0;
+	map->ele.c = 0;
 }
