@@ -1,36 +1,40 @@
 #include "../../includes/cub3d.h"
 
-void skip_new_lines(char **map, char **p_map)
+int	check_map_structer(t_map *map_stu)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	char **map;
 
+	map = map_stu->all_content;
+	i = 0;
 	while (map[i])
 	{
-		if (map[i][0] != '\n') // skip empty lines
-		{
-			p_map[j] = strdup(map[i]); // deep copy
-			if (!p_map[j])
-			{
-				// handle allocation failure
-				while (j-- > 0)
-					free(p_map[j]);
-				return;
-			}
-			j++;
-		}
+		if (ft_strncmp(map[i],"NO ", 3) == 0)
+			map_stu->ele.no = 1;
+		if (ft_strncmp(map[i],"SO ", 3) == 0)
+			map_stu->ele.so = 1;
+		if (ft_strncmp(map[i],"WE ", 3) == 0)
+			map_stu->ele.we = 1;
+		if (ft_strncmp(map[i],"EA ", 3) == 0)
+			map_stu->ele.ea = 1;
+		if (ft_strncmp(map[i],"F ", 2) == 0)
+			map_stu->ele.f = 1;
+		if (ft_strncmp(map[i],"C ", 2) == 0)
+			map_stu->ele.c = 1;
 		i++;
 	}
-	p_map[j] = NULL; // terminate the array
+	return ((map_stu->ele.no && map_stu->ele.so &&
+			map_stu->ele.we && map_stu->ele.ea &&
+			map_stu->ele.f && map_stu->ele.c) * i);
 }
-
-void	parce(char **map, int len)
+void	parce(char **map)
 {
-	char	**p_map;
+	t_map	*map_list;
 	int		i;
 
 	i = 0;
-	p_map = malloc(sizeof(char *) * len);
-	skip_new_lines(map, p_map);
-	print_twodarr(p_map);
+	map_list = malloc(sizeof(t_map));
+	map_list->all_content = map;
+	if (check_map_structer(map_list) == 0)
+		print_error("Error: some of the info are not there.", 15);
 }
