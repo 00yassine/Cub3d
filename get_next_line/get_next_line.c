@@ -88,8 +88,8 @@ char	*read_file(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*line;
+	static char *buffer;
+	char *line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -98,5 +98,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_get_line(buffer);
 	buffer = ft_get_next(buffer);
+	if (!buffer)
+		buffer = NULL;
 	return (line);
 }

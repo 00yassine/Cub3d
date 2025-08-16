@@ -1,0 +1,83 @@
+#include "../../includes/cub3d.h"
+
+int	ft_atoi_skip(char *str, int *i)
+{
+	int	nb;
+
+	nb = 0;
+	skip_spaces(str, i);
+	if (!(str[*i] >= '0' && str[*i] <= '9'))
+		print_error("Error: Invalid color number\n", 1);
+	while (str[*i] >= '0' && str[*i] <= '9')
+	{
+		nb = nb * 10 + (str[*i] - 48);
+		(*i)++;
+	}
+	skip_spaces(str, i);
+	return (nb);
+}
+
+t_color	ft_nb_take(char *str, int i)
+{
+	t_color	color;
+
+	color.r = ft_atoi_skip(str, &i);
+	if (str[i] != ',')
+		print_error("Error: Missing comma in color\n", 1);
+	i++;
+	color.g = ft_atoi_skip(str, &i);
+	if (str[i] != ',')
+		print_error("Error: Missing comma in color\n", 1);
+	i++;
+	color.b = ft_atoi_skip(str, &i);
+	while (str[i])
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			print_error("Error: Invalid characters after color\n", 1);
+		i++;
+	}
+	if (color.r < 0 || color.r > 255
+		|| color.g < 0 || color.g > 255
+		|| color.b < 0 || color.b > 255)
+		print_error("Error: RGB value out of range (0-255)\n", 1);
+	return (color);
+}
+void	get_path_bounds(char *line, int i, int *start, int *end)
+{
+	int	last;
+
+	while (line[i] && (line[i] == ' ' || (line[i] >= 9 && line[i] <= 13)))
+		i++;
+	if (!line[i])
+		print_error("Error: Missing path after identifier\n", 1);
+	*start = i;
+	last = *start;
+	while (line[last] && line[last] != '\n')
+		last++;
+	last--;
+	while (line[last] == ' ' || (line[last] >= 9 && line[last] <= 13))
+		last--;
+	*end = last + 1;
+	i = *start;
+	while (i < *end)
+	{
+		if (line[i] == ' ' || (line[i] >= 9 && line[i] <= 13))
+			print_error("Error: Space inside path\n", 1);
+		i++;
+	}
+}
+
+char	*ft_str_take(char *line, int i)
+{
+	int	start;
+	int	end;
+
+	get_path_bounds(line, i, &start, &end);
+	return (ft_substr(line, start, end - start));
+}
+
+void	skip_spaces(char *str, int *i)
+{
+	while (str[*i] == ' ' || (str[*i] >= 9 && str[*i] <= 13))
+		(*i)++;
+}
