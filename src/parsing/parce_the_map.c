@@ -22,7 +22,7 @@ int	check_map_structer(t_map *map_stu, char **map)
 		j = 0;
 		while (map[i][j] && (map[i][j] == ' ' || (map[i][j] >= 9 && map[i][j] <= 13)))
 			j++;
-		if (ft_strncmp(map[i] + j, "NO ", 3) == 0 || ft_strncmp(map[i] + j, "NO	", 3) == 0)
+		if (ft_strncmp(map[i] + j, "NO ", 3) == 0 || ft_strncmp(map[i] + j, "NO\t", 3) == 0)
 			map_stu->ele.no += 1;
 		else if (ft_strncmp(map[i] + j, "SO ", 3) == 0 || ft_strncmp(map[i] + j, "SO\t", 3) == 0)
 			map_stu->ele.so += 1;
@@ -79,5 +79,5 @@ void	parce(char **map)
 	if (check_map_structer(map_list, map_list->all_content) != 1)
 		print_error("Error: some of the info are not there.", 15);
 	fill_player_str(map_list);
-	// print_info(map_list);
+	check_map(map_list);
 }

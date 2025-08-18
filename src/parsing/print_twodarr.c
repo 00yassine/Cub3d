@@ -26,19 +26,13 @@ void	print_twodarr(char **map)
 void print_info(t_map *map)
 {
     int i = 0;
-
-    if (!map)
-    {
-        printf("Map is NULL\n");
-        return;
-    }
-
     printf("Map content:\n");
     if (map->all_content)
     {
         while (map->all_content[i])
         {
-            printf("%s\n", map->all_content[i]);
+            if (map->all_content[i][0] != '\n')
+                printf("%s\n", map->all_content[i]);
             i++;
         }
     }

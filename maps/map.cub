@@ -1,17 +1,7 @@
-
 F 1,251,0
-
-
-C 2,5,1
-
+C 2,5,100
 SO  ../textures/Syasine.xpm
 NO ../textures/Nyassine.xpm
 WE ../txtures/Wyassine.xpm
 EA ../textures/Wyassine.xpm
 
-
-
-1111111111
-1000000001
-1E00000001
-1111111111
