@@ -21,7 +21,7 @@ int count_lines(char *filename)
 
 void print_error(char *error, int exitcode)
 {
-	perror(error);
+	printf("\033[31m%s",error);
 	exit(exitcode);
 }
 int	main(int ac, char **av)
@@ -41,6 +41,6 @@ int	main(int ac, char **av)
 		print_error("Error: cannot open file", 5);
 	while((map[i] = get_next_line(fd)) != NULL)
 		i++;
-	parce(map, len);
+	parce(map);
 	return (0);
 }

@@ -1,7 +1,8 @@
 NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRC = src/main.c get_next_line/get_next_line.c src/parsing/parce_the_map.c src/parsing/print_twodarr.c
+SRC = src/main.c get_next_line/get_next_line.c src/parsing/parce_the_map.c src/parsing/print_twodarr.c \
+	src/parsing/struct_initializer.c src/parsing/parsing_helper.c src/parsing/checking_map.c
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
