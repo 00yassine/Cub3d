@@ -45,6 +45,7 @@ void			print_info(t_map *map);
 //those are the main funtions
 void			parce(char **map);
 void			struct_initializer(t_map *map);
+void			validate_map(char **map);
 
 //error functions
 void			print_error(char *error, int exitcode);
