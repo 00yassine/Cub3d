@@ -1,0 +1,22 @@
+# Build artifacts
+cub3d
+*.o
+*.a
+*.out
+*.swp
+*.tmp
+*.log
+
+# Libft build outputs
+libft/*.o
+libft/*.a
+
+# DS_Store (macOS)
+.DS_Store
+
+# Editor settings
+.vscode/
+.idea/
+
+# Cache
+__pycache__/
