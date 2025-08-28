@@ -69,7 +69,7 @@ void	fill_player_str(t_map *map_list)
 	}
 }
 
-void	parce(char **map)
+t_map	*parce(char **map)
 {
 	t_map	*map_list;
 
@@ -80,4 +80,5 @@ void	parce(char **map)
 		print_error("Error: some of the info are not there.", 15);
 	fill_player_str(map_list);
 	validate_map(map_list->all_content);
+	return (map_list);
 }

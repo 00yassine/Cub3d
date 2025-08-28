@@ -1,0 +1,19 @@
+{
+  "files.associations": {
+    "*.ejs": "html",
+    "cub3d.h": "c",
+    "array": "c",
+    "chrono": "c",
+    "deque": "c",
+    "string": "c",
+    "unordered_map": "c",
+    "vector": "c",
+    "string_view": "c",
+    "format": "c",
+    "initializer_list": "c",
+    "span": "c",
+    "text_encoding": "c",
+    "random": "c",
+    "iterator": "c"
+  }
+}
