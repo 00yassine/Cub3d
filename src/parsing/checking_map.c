@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 14:21:50 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/08/25 12:10:57 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/09/03 20:07:52 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,13 @@ void	check_map_is_last(char **map)
 void	check_map_valid(char **map)
 {
 	char	c;
+	int		i;
+	int		j;
+	int		player_count;
 
-	int (i) = 0, (j) = 0, (player_count) = 0;
+	i = 0;
+	j = 0;
+	player_count = 0;
 	while (map[i])
 	{
 		if (is_map_line(map[i]))

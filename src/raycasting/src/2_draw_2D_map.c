@@ -1,14 +1,14 @@
 #include "../../../includes/cub3d.h"
 
-void	put_px(t_data *data, char *img_data, int line_len, int x, int y, unsigned int color)
+void	put_px(char *img_adr, int line_len, int x, int y, unsigned int color)
 {
-	if (x < 0 || y < 0 || x >= data->cols * TS || y >= data->rows * TS)
+	if (x < 0 || y < 0 || x >= 400 || y >= 400)
 		return;
 
-	((unsigned int *)img_data)[y * (line_len / 4) + x] = color;
+	((unsigned int *)img_adr)[y * (line_len / 4) + x] = color;
 }
 
-void	draw_tile(t_data *data, char *img_data, int line_len, int px, int py, int color)
+void	draw_tile(char *img_adr, int line_len, int px, int py, int color)
 {
 	int y = 0;
 	while (y < TS)
@@ -16,14 +16,14 @@ void	draw_tile(t_data *data, char *img_data, int line_len, int px, int py, int c
 		int x = 0;
 		while (x < TS)
 		{
-			put_px(data, img_data, line_len, px + x, py + y, color);
+			put_px(img_adr, line_len, px + x, py + y, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	draw_2d_map(t_data *data, char *img_data, int line_len)
+void	draw_2d_map(t_data *data, char *img_adr, int line_len)
 {
 	int row = 0;
 	int color;
@@ -36,26 +36,21 @@ void	draw_2d_map(t_data *data, char *img_data, int line_len)
 				color =  0x8B4513;
 			else
 				color =  0xFFFFFF;
-			draw_tile(data, img_data, line_len, col * TS, row * TS, color);
+			draw_tile(img_adr, line_len, col * TS, row * TS, color);
 			col++;
 		}
 		row++;
 	}
 }
 
-int	is_wall(t_data *d, int x, int y)
+int	is_wall(t_data *d, double x, double y)
 {
-	int map_x = x / TS;
-	int map_y = y / TS;
-	
+	int map_x;
+	int map_y;
+
+	map_x = (int)floor(x / TS);
+	map_y = (int)floor(y / TS);
 	if (map_x < 0 || map_y < 0 || map_x >= d->cols || map_y >= d->rows)
 		return (1);
-	
 	return (d->map[map_y][map_x] == '1');
-}
-
-int	can_move(t_data *d, int x, int y, int r)
-{
-	return (!is_wall(d, x - r, y - r) && !is_wall(d, x + r, y - r) && 
-			!is_wall(d, x - r, y + r) && !is_wall(d, x + r, y + r));
 }

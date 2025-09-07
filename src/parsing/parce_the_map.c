@@ -14,7 +14,8 @@
 
 int	check_map_structer(t_map *map_stu, char **map)
 {
-	int (i), (j);
+	int i;
+	int j;
 
 	i = 0;
 	while (map[i])
