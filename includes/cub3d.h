@@ -2,13 +2,11 @@
 # define CUB3D_H
 
 # include <stdlib.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
 # include <math.h>
-# include <sys/time.h>
 # include <mlx.h>
 # include "../libft/libft.h"
 # include "../get_next_line/get_next_line.h"
@@ -18,7 +16,6 @@
 # define PLAYER_R   6
 # define MOVE_SPEED 8.0
 # define ROT_SPEED  0.1
-# define MOUSE_SEN  0.5
 # define EPS        1e-6
 # define FOV        1.0471975512
 # define SCREEN_WIDTH  1920
@@ -42,9 +39,14 @@ typedef struct s_input {
 	int k_down;
 	int k_left;
 	int k_right;
-	int k_strafe_left;
-	int k_strafe_right;
+	int k_view_left;
+	int k_view_right;
 } t_input;
+typedef struct s_color {
+	int	r;
+	int	g;
+	int	b;
+} t_color;
 
 typedef struct s_data {
 	int			rows;
@@ -53,14 +55,14 @@ typedef struct s_data {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img;
-	void		*img_map2d;
 	char		*img_adr;
-	char		*img_map_adr;
 	int			bpp;
 	int			line_len;
-	int			line_len_map;
 	int			endian;
+	int 		speed;
 	t_player	player;
+	t_color		floor;
+	t_color		ceiling;
 	t_input		input;
 } t_data;
 
@@ -73,11 +75,6 @@ typedef struct s_ele_flags {
 	int	c;
 } t_ele_flags;
 
-typedef struct s_color {
-	int	r;
-	int	g;
-	int	b;
-} t_color;
 
 typedef struct s_map {
 	char		**all_content;
@@ -96,25 +93,21 @@ int		update_loop(void *p);
 
 /* init */
 void	init_data_from_map(t_data *data, t_map *map_data);
-
+void	count_map_dimensions(char **map, int *rows, int *cols);
 /* input */
 int		key_press(int key, void *p);
 int		key_release(int key, void *p);
-int		mouse_move(int x, int y, void *p);
 
 /* drawing */
-void	put_px(char *img_adr, int line_len, int x, int y, unsigned int color);
-void	draw_tile(char *img_adr, int line_len, int px, int py, int color);
-void	draw_2d_map(t_data *data, char *img_adr, int line_len);
-void	draw_player(t_data *data, char *img_adr, int line_len);
 void	init_player_pos(t_data *data);
 void	draw_3d(t_data *d);
 void	draw_wall_3d(t_data *d, int x, double dist);
+unsigned int rgb_to_hex(t_color *c);
+void my_mlx_pixel_put(char *img_adr, int x, int y, int color, int line_len, int bpp);
 
 /* raycasting */
 double	get_distance(t_data *d, double ray_angle);
 int		is_wall(t_data *d, double x, double y);
-int		can_move(t_data *d, double x, double y, int r);
 
 /* parsing */
 t_map	*parce(char **map);
@@ -127,8 +120,6 @@ char	*ft_str_take(char *line, int i);
 void	skip_spaces(char *str, int *i);
 
 /* utils */
-void	print_twodarr(char **map);
-void	print_info(t_map *map);
 void	print_error(char *error, int exitcode);
 
 #endif

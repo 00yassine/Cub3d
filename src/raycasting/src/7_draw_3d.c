@@ -2,7 +2,7 @@
 
 void my_mlx_pixel_put(char *img_adr, int x, int y, int color, int line_len, int bpp)
 {
-    char *dst;
+    void *dst;
 
     dst = img_adr + (y * line_len + x * (bpp / 8));
     *(unsigned int*)dst = color;
@@ -17,30 +17,20 @@ void	draw_wall_3d(t_data *d, int x, double dist)
 
 	if (dist < EPS)
 		dist = EPS;
-	line_height = (int)((TS * SCREEN_HEIGHT) / dist);
+	line_height = (int)ceil((TS * SCREEN_HEIGHT) / dist);
 	draw_start = -line_height / 2 + (SCREEN_HEIGHT) / 2;
 	if (draw_start < 0)
 		draw_start = 0;
 	draw_end = line_height / 2 + (SCREEN_HEIGHT) / 2;
 	if (draw_end >= SCREEN_HEIGHT)
 		draw_end = SCREEN_HEIGHT - 1;
-
 	y = 0;
-	while (y < draw_start)
-	{
-		my_mlx_pixel_put(d->img_adr, x, y, 0x87CEEB, d->line_len, d->bpp);
-		y++;
-	}
-	while (y <= draw_end)
-	{
+	while (y++ < draw_start)
+		my_mlx_pixel_put(d->img_adr, x, y, rgb_to_hex(&d->ceiling), d->line_len, d->bpp);
+	while (y++ <= draw_end)
 		my_mlx_pixel_put(d->img_adr, x, y, 0x8B4513, d->line_len, d->bpp);
-		y++;
-	}
-	while (y < SCREEN_HEIGHT)
-	{
-		my_mlx_pixel_put(d->img_adr, x, y, 0x228B22, d->line_len, d->bpp);
-		y++;
-	}
+	while (y++ < SCREEN_HEIGHT)
+		my_mlx_pixel_put(d->img_adr, x, y, rgb_to_hex(&d->floor), d->line_len, d->bpp);
 }
 
 void draw_3d(t_data *d)

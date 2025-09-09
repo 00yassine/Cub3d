@@ -66,18 +66,17 @@ void init_data_from_map(t_data *data, t_map *map_data)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr,
 		SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
+	data->floor = map_data->floor;
+	data->ceiling = map_data->ceiling;
 	data->img = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	data->img_map2d = mlx_new_image(data->mlx_ptr, 400, 400);
 	data->img_adr = mlx_get_data_addr(data->img,
 		&data->bpp, &data->line_len, &data->endian);
-	data->img_map_adr = mlx_get_data_addr(data->img_map2d, &data->bpp, &data->line_len_map, &data->endian);
 	init_player_pos(data);
-	data->player.fpx = data->player.x;
-	data->player.fpy = data->player.y;
+	data->speed = 1;
 	data->input = (t_input){0, 0, 0, 0, 0, 0};
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_map2d, 0, 0);
 	mlx_hook(data->win_ptr, 2, 1L<<0, key_press, data);
 	mlx_hook(data->win_ptr, 3, 1L<<1, key_release, data);
+	// mlx_hook(data->win_ptr, 3, 1L<<1, key_release, data);
 	mlx_loop_hook(data->mlx_ptr, update_loop, data);
 }

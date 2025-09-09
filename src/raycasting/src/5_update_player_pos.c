@@ -2,7 +2,6 @@
 
 static void	clear_img(t_data *d)
 {
-	// clear whole screen buffer
 	ft_memset(d->img_adr, 0, SCREEN_HEIGHT * d->line_len);
 }
 
@@ -13,8 +12,8 @@ static void	move(t_data *d, double angle)
 	double	offset_x;
 	double	offset_y;
 
-	new_x = d->player.fpx + cos(angle) * MOVE_SPEED;
-	new_y = d->player.fpy + sin(angle) * MOVE_SPEED;
+	new_x = d->player.fpx + cos(angle) * MOVE_SPEED * d->speed;
+	new_y = d->player.fpy + sin(angle) * MOVE_SPEED * d->speed;
 
 	offset_x = 5;
 	if (cos(angle) < 0)
@@ -39,9 +38,9 @@ static void	handle_movement(t_data *d)
 		move(d, d->player.angle);
 	if (d->input.k_down == 1)
 		move(d, d->player.angle + M_PI);
-	if (d->input.k_strafe_left == 1)
+	if (d->input.k_view_left == 1)
 		move(d, d->player.angle - M_PI / 2);
-	if (d->input.k_strafe_right == 1)
+	if (d->input.k_view_right == 1)
 		move(d, d->player.angle + M_PI / 2);
 }
 
@@ -72,10 +71,7 @@ int update_loop(void *p)
 	handle_movement(d);
 	handle_rotation(d);
 	clear_img(d);
-	draw_2d_map(d, d->img_map_adr, d->line_len_map);
-	draw_player(d, d->img_map_adr, d->line_len_map);
 	draw_3d(d);
 	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img, 0, 0);
-	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img_map2d, 0, 0);
 	return (0);
 }
