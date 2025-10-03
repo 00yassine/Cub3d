@@ -81,3 +81,13 @@ void	skip_spaces(char *str, int *i)
 	while (str[*i] == ' ' || (str[*i] >= 9 && str[*i] <= 13))
 		(*i)++;
 }
+
+int	is_map_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+		i++;
+	return (line[i] == '1' || line[i] == '0');
+}

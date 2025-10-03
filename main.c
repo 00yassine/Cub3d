@@ -1,4 +1,5 @@
-#include "../includes/cub3d.h"
+#include "./includes/cub3d.h"
+
 int count_lines(char *filename)
 {
 	int		fd;
@@ -28,6 +29,7 @@ int	main(int ac, char **av)
 {
 	int		fd;
 	char	**map;
+	t_map	*parsed_map;
 	int		i;
 	int		len;
 
@@ -41,6 +43,7 @@ int	main(int ac, char **av)
 		print_error("Error: cannot open file", 5);
 	while((map[i] = get_next_line(fd)) != NULL)
 		i++;
-	parce(map);
+	parsed_map = parce(map);
+	start(parsed_map);
 	return (0);
 }

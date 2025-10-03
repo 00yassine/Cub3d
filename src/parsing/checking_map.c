@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   checking_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 14:21:50 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/08/18 14:26:48 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/09/03 20:07:52 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	is_map_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		i++;
-	return (line[i] == '1' || line[i] == '0');
-}
 
 void	check_map_is_last(char **map)
 {
@@ -45,8 +35,13 @@ void	check_map_is_last(char **map)
 void	check_map_valid(char **map)
 {
 	char	c;
+	int		i;
+	int		j;
+	int		player_count;
 
-	int (i) = 0, (j) = 0, (player_count) = 0;
+	i = 0;
+	j = 0;
+	player_count = 0;
 	while (map[i])
 	{
 		if (is_map_line(map[i]))
