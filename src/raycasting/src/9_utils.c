@@ -1,6 +1,5 @@
 #include "../../../includes/cub3d.h"
 
-
 unsigned int rgb_to_hex(t_color *c)
 {
     unsigned int hex;

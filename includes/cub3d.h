@@ -17,9 +17,9 @@
 # define MOVE_SPEED 8.0
 # define ROT_SPEED  0.1
 # define EPS        1e-6
-# define FOV        1.0471975512
-# define SCREEN_WIDTH  1920
-# define SCREEN_HEIGHT 1500
+# define FOV        1.0000000000
+# define SCREEN_WIDTH  1200
+# define SCREEN_HEIGHT 800
 
 typedef struct s_point {
 	double x;
@@ -42,11 +42,22 @@ typedef struct s_input {
 	int k_view_left;
 	int k_view_right;
 } t_input;
+
 typedef struct s_color {
 	int	r;
 	int	g;
 	int	b;
 } t_color;
+
+typedef struct s_tex
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		width;
+	int		height;
+}	t_tex;
 
 typedef struct s_data {
 	int			rows;
@@ -64,6 +75,7 @@ typedef struct s_data {
 	t_color		floor;
 	t_color		ceiling;
 	t_input		input;
+	t_tex		tex[4];
 } t_data;
 
 typedef struct s_ele_flags {
@@ -75,6 +87,13 @@ typedef struct s_ele_flags {
 	int	c;
 } t_ele_flags;
 
+typedef struct s_hit
+{
+	double dist;
+	int is_vertical;
+	double hit_x;
+	double hit_y;
+}	t_hit;
 
 typedef struct s_map {
 	char		**all_content;
@@ -106,7 +125,7 @@ unsigned int rgb_to_hex(t_color *c);
 void my_mlx_pixel_put(char *img_adr, int x, int y, int color, int line_len, int bpp);
 
 /* raycasting */
-double	get_distance(t_data *d, double ray_angle);
+void	get_distance(t_data *d, double ray_angle, t_hit *hit);
 int		is_wall(t_data *d, double x, double y);
 
 /* parsing */
