@@ -56,6 +56,20 @@ void count_map_dimensions(char **map, int *rows, int *cols)
 		(*rows)++;
 	}
 }
+void	init_textures(t_data *d)
+{
+	int i = 0;
+	d->tex[0].img = mlx_xpm_file_to_image(d->mlx_ptr, "textures/AnyConv.com__bluestone.xpm", &d->tex[0].width, &d->tex[0].height);
+	d->tex[1].img = mlx_xpm_file_to_image(d->mlx_ptr, "textures/AnyConv.com__colorstone.xpm", &d->tex[1].width, &d->tex[1].height);
+	d->tex[2].img = mlx_xpm_file_to_image(d->mlx_ptr, "textures/AnyConv.com__eagle.xpm", &d->tex[2].width, &d->tex[2].height);
+	d->tex[3].img = mlx_xpm_file_to_image(d->mlx_ptr, "textures/AnyConv.com__greystone.xpm", &d->tex[3].width, &d->tex[3].height);
+
+	while (i < 4)
+	{
+		d->tex[i].addr = mlx_get_data_addr(d->tex[i].img, &d->tex[i].bpp, &d->tex[i].line_len, &d->endian);
+		i++;
+	}
+}
 
 void init_data_from_map(t_data *data, t_map *map_data)
 {
@@ -77,6 +91,7 @@ void init_data_from_map(t_data *data, t_map *map_data)
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 	mlx_hook(data->win_ptr, 2, 1L<<0, key_press, data);
 	mlx_hook(data->win_ptr, 3, 1L<<1, key_release, data);
+	init_textures(data);
 	// mlx_hook(data->win_ptr, 3, 1L<<1, key_release, data);
 	mlx_loop_hook(data->mlx_ptr, update_loop, data);
 }

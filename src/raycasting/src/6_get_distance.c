@@ -72,7 +72,7 @@ t_point get_next_intercept(t_point current, double ray_angle, int vertical)
     return next;
 }
 
-double get_distance(t_data *d, double ray_angle)
+void get_distance(t_data *d, double ray_angle, t_hit *hit)
 {
     t_point y_int;
     t_point x_int;
@@ -90,8 +90,12 @@ double get_distance(t_data *d, double ray_angle)
 
     y_dist = hypot(y_int.x - d->player.fpx, y_int.y - d->player.fpy);
     x_dist = hypot(x_int.x - d->player.fpx, x_int.y - d->player.fpy);
-
+    hit->hit_x = x_dist;
+    hit->hit_y = y_dist;
+    hit->dist = y_dist;
     if (y_dist >= x_dist)
-        return (x_dist);
-    return (y_dist);
+    {
+        hit->dist = x_dist;
+        hit->is_vertical = 1;
+    }
 }
