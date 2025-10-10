@@ -141,4 +141,6 @@ void	skip_spaces(char *str, int *i);
 /* utils */
 void	print_error(char *error, int exitcode);
 
+/* minimap */
+int	render_frame(t_data *d);
 #endif
