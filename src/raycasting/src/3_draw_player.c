@@ -1,6 +1,5 @@
 #include "../../../includes/cub3d.h"
 
-
 void	init_player_pos(t_data *data)
 {
 	int r = 0;
