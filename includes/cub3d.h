@@ -7,7 +7,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <math.h>
-# include "../mlx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include "../get_next_line/get_next_line.h"
 
@@ -122,7 +122,8 @@ void	count_map_dimensions(char **map, int *rows, int *cols);
 /* input */
 int		key_press(int key, void *p);
 int		key_release(int key, void *p);
-
+int		close_window(void *p);
+int		mouse_move(int x, int y, void *p);
 /* drawing */
 void	init_player_pos(t_data *data);
 void	draw_3d(t_data *d);

@@ -59,10 +59,14 @@ void count_map_dimensions(char **map, int *rows, int *cols)
 void	init_textures(t_data *d)
 {
 	int i = 0;
-	d->tex[0].img = mlx_xpm_file_to_image(d->mlx_ptr, "textures/AnyConv.com__bluestone.xpm", &d->tex[0].width, &d->tex[0].height);
-	d->tex[1].img = mlx_xpm_file_to_image(d->mlx_ptr, "textures/AnyConv.com__colorstone.xpm", &d->tex[1].width, &d->tex[1].height);
-	d->tex[2].img = mlx_xpm_file_to_image(d->mlx_ptr, "textures/AnyConv.com__eagle.xpm", &d->tex[2].width, &d->tex[2].height);
-	d->tex[3].img = mlx_xpm_file_to_image(d->mlx_ptr, "textures/AnyConv.com__greystone.xpm", &d->tex[3].width, &d->tex[3].height);
+	d->tex[TEX_NORTH].img = mlx_xpm_file_to_image(d->mlx_ptr,
+		"textures/AnyConv.com__bluestone.xpm",&d->tex[TEX_NORTH].width, &d->tex[TEX_NORTH].height);
+	d->tex[TEX_SOUTH].img = mlx_xpm_file_to_image(d->mlx_ptr,
+		 "textures/AnyConv.com__colorstone.xpm", &d->tex[TEX_SOUTH].width, &d->tex[TEX_SOUTH].height);
+	d->tex[TEX_EAST].img = mlx_xpm_file_to_image(d->mlx_ptr,
+		 "textures/AnyConv.com__eagle.xpm", &d->tex[TEX_EAST].width, &d->tex[TEX_EAST].height);
+	d->tex[TEX_WEST].img = mlx_xpm_file_to_image(d->mlx_ptr,
+		 "textures/AnyConv.com__greystone.xpm", &d->tex[TEX_WEST].width, &d->tex[TEX_WEST].height);
 
 	while (i < 4)
 	{
@@ -88,10 +92,12 @@ void init_data_from_map(t_data *data, t_map *map_data)
 	init_player_pos(data);
 	data->speed = 1;
 	data->input = (t_input){0, 0, 0, 0, 0, 0};
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
+	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 	mlx_hook(data->win_ptr, 2, 1L<<0, key_press, data);
 	mlx_hook(data->win_ptr, 3, 1L<<1, key_release, data);
+	mlx_hook(data->win_ptr, 17, 0, close_window, data);
+	mlx_hook(data->win_ptr, 6, 1L << 6, mouse_move, data);
+	// mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
 	init_textures(data);
-	// mlx_hook(data->win_ptr, 3, 1L<<1, key_release, data);
 	mlx_loop_hook(data->mlx_ptr, update_loop, data);
 }

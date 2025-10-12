@@ -1,7 +1,7 @@
 NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-MLX_DIR = mlx
+MLX_DIR = minilibx-linux
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 MLX_INCLUDE = -I$(MLX_DIR)
 SRC = main.c get_next_line/get_next_line.c src/parsing/parce_the_map.c src/parsing/print_twodarr.c \
