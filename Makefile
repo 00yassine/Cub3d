@@ -15,23 +15,28 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 
-$(MLX_DIR)/libmlx.a:
-	@if [ ! -d "$(MLX_DIR)" ]; then \
-		echo "Error: MLX directory not found. Please run:"; \
-		echo "git clone https://github.com/42Paris/minilibx-linux.git mlx && cd mlx && make"; \
-		exit 1; \
+$(NAME): $(SRC) $(LIBFT)
+	@echo "Building minilibx if needed..."
+	@if [ ! -f "$(MLX_DIR)/libmlx.a" ]; then \
+		echo "MLX library not found. Building it manually..."; \
+		cd $(MLX_DIR) && \
+		if [ ! -f "Makefile.gen" ]; then \
+			./configure > /dev/null 2>&1 || true; \
+		fi && \
+		make -f Makefile.gen libmlx.a > /dev/null 2>&1 || true; \
 	fi
-	make -C $(MLX_DIR)
-
-$(NAME): $(SRC) $(LIBFT) $(MLX_DIR)/libmlx.a
-	$(CC) $(CFLAGS) $(MLX_INCLUDE) $(SRC) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@echo "Compiling $(NAME)..."
+	$(CC) $(CFLAGS) -I$(MLX_DIR) -Iincludes $(SRC) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@echo "Build successful!"
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 clean:
 	make -C $(LIBFT_DIR) clean
-	@if [ -d "$(MLX_DIR)" ]; then make -C $(MLX_DIR) clean; fi
+	@if [ -d "$(MLX_DIR)" ] && [ -f "$(MLX_DIR)/Makefile.gen" ]; then \
+		make -C $(MLX_DIR) -f Makefile.gen clean; \
+	fi
 
 fclean: clean
 	rm -f $(NAME)

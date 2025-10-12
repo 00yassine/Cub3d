@@ -46,7 +46,7 @@ int	mouse_move(int x, int y, void *p)
     if (last_x == -1)
         last_x = x;
     delta_x = x - last_x;
-    d->player.angle += delta_x * 0.0001;
+    d->player.angle += delta_x * 0.002;
     last_x = SCREEN_WIDTH / 2;
     mlx_mouse_move(d->mlx_ptr, d->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
     return (0);

@@ -92,12 +92,11 @@ void init_data_from_map(t_data *data, t_map *map_data)
 	init_player_pos(data);
 	data->speed = 1;
 	data->input = (t_input){0, 0, 0, 0, 0, 0};
-	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 	mlx_hook(data->win_ptr, 2, 1L<<0, key_press, data);
 	mlx_hook(data->win_ptr, 3, 1L<<1, key_release, data);
 	mlx_hook(data->win_ptr, 17, 0, close_window, data);
 	mlx_hook(data->win_ptr, 6, 1L << 6, mouse_move, data);
-	// mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
+	mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
 	init_textures(data);
 	mlx_loop_hook(data->mlx_ptr, update_loop, data);
 }
