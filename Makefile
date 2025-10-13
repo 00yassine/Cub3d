@@ -17,7 +17,8 @@ SRC = main.c get_next_line/get_next_line.c\
 	src/raycasting/src/6_get_distance.c\
 	src/raycasting/src/7_draw_3d.c\
 	src/raycasting/src/9_utils.c\
-	src/raycasting/src/8_add_textures.c
+	src/raycasting/src/8_add_textures.c\
+	src/raycasting/src/animation_sprits.c
 	LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
