@@ -20,27 +20,16 @@
 # define FOV        1.0000000000
 # define SCREEN_WIDTH  1200
 # define SCREEN_HEIGHT 800
-#define TEX_NORTH 0
-#define TEX_SOUTH 1
-#define TEX_EAST  2
-#define TEX_WEST  3
-
-# define SCREEN_WIDTH  1920
-# define SCREEN_HEIGHT 1080
-# define MINIMAP_SIZE     200    // pixels
-# define MINIMAP_SCALE    8      // pixels per map cell
+# define TEX_NORTH 0
+# define TEX_SOUTH 1
+# define TEX_EAST  2
+# define TEX_WEST  3
+# define MINIMAP_SIZE     200
+# define MINIMAP_SCALE    8
 # define MINIMAP_RANGE    6
 # define WIDTH 800
 # define HEIGHT 600
 
-typedef struct s_anime
-{
-	void	*mlx;
-	void	*win;
-	void	*frames[4]; // animation frames
-	int		current_frame;
-	int		frame_delay;
-}	t_anime;
 typedef struct s_point {
 	double x;
 	double y;
