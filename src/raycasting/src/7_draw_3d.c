@@ -1,5 +1,7 @@
 #include "../../../includes/cub3d.h"
 
+
+
 void my_mlx_pixel_put(char *img_adr, int x, int y, int color, int line_len, int bpp)
 {
 	char *dst;
