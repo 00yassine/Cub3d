@@ -1,21 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_helper.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/13 19:12:30 by ykabili-          #+#    #+#             */
+/*   Updated: 2025/10/13 19:14:34 by ykabili-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
-
-int	ft_atoi_skip(char *str, int *i)
-{
-	int	nb;
-
-	nb = 0;
-	skip_spaces(str, i);
-	if (!(str[*i] >= '0' && str[*i] <= '9'))
-		print_error("Error: Invalid color number\n", 1);
-	while (str[*i] >= '0' && str[*i] <= '9')
-	{
-		nb = nb * 10 + (str[*i] - 48);
-		(*i)++;
-	}
-	skip_spaces(str, i);
-	return (nb);
-}
 
 t_color	ft_nb_take(char *str, int i)
 {
@@ -42,6 +37,7 @@ t_color	ft_nb_take(char *str, int i)
 		print_error("Error: RGB value out of range (0-255)\n", 1);
 	return (color);
 }
+
 void	get_path_bounds(char *line, int i, int *start, int *end)
 {
 	int	last;
