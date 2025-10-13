@@ -18,8 +18,8 @@
 # define ROT_SPEED  0.1
 # define EPS        1e-6
 # define FOV        1.0000000000
-# define SCREEN_WIDTH  1200
-# define SCREEN_HEIGHT 800
+# define SCREEN_WIDTH  1920
+# define SCREEN_HEIGHT 1080
 # define MINIMAP_SIZE     200    // pixels
 # define MINIMAP_SCALE    8      // pixels per map cell
 # define MINIMAP_RANGE    6

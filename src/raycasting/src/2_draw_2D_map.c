@@ -1,80 +1,104 @@
 #include "../../../includes/cub3d.h"
 
-#define MINIMAP_RANGE 6
-#define MINIMAP_CELL  10
-#define PLAYER_SIZE   8
-#define MINIMAP_X     16   // top-left corner of the minimap on screen
-#define MINIMAP_Y     16
+#define MAX_MINIMAP_WIDTH 200
+#define MAX_MINIMAP_HEIGHT 200
+#define PLAYER_SIZE 4
+#define MINIMAP_OFFSET_X 10
+#define MINIMAP_OFFSET_Y 10
 
+/* Draw a single pixel in the image */
 void	my_mlx_pixel_put_minimap(t_data *d, int x, int y, int color)
 {
 	char	*dst;
 
 	if (x < 0 || y < 0 || x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT)
-		return;
-
+		return ;
 	dst = d->img_adr + (y * d->line_len + x * (d->bpp / 8));
-	*(unsigned int *)dst = mlx_get_color_value(d->mlx_ptr, color);
+	*(unsigned int *)dst = color;
 }
 
-void draw_minimap(t_data *d)
+/* Draw one square cell of the minimap */
+static void	draw_square(t_data *d, int x, int y, int color, int cell_size)
 {
-    if (!d->map || d->rows <= 0 || d->cols <= 0) return;
+	int	i;
+	int	j;
+	int	sx;
+	int	sy;
 
-    int x, y, i, j, color;
+	sy = y * cell_size;
+	i = 0;
+	while (i < cell_size)
+	{
+		sx = x * cell_size;
+		j = 0;
+		while (j < cell_size)
+		{
+			my_mlx_pixel_put_minimap(d, sx + j, sy + i, color);
+			j++;
+		}
+		i++;
+	}
+}
 
-    int start_row = (int)(d->player.fpy) - MINIMAP_RANGE;
-    int end_row   = (int)(d->player.fpy) + MINIMAP_RANGE;
-    int start_col = (int)(d->player.fpx) - MINIMAP_RANGE;
-    int end_col   = (int)(d->player.fpx) + MINIMAP_RANGE;
+/* Draw the player on the minimap */
+static void	draw_player(t_data *d, int cell_size)
+{
+	int		i;
+	int		j;
+	double	map_x;
+	double	map_y;
+	int		px;
+	int		py;
 
-    if (start_row < 0) start_row = 0;
-    if (start_col < 0) start_col = 0;
-    if (end_row >= d->rows) end_row = d->rows - 1;
-    if (end_col >= d->cols) end_col = d->cols - 1;
+	map_x = d->player.fpx / 64.0;
+	map_y = d->player.fpy / 64.0;
+	px = (int)(map_x * cell_size - (PLAYER_SIZE / 2));
+	py = (int)(map_y * cell_size - (PLAYER_SIZE / 2));
 
-    int vis_rows = end_row - start_row + 1;
-    int vis_cols = end_col - start_col + 1;
+	i = 0;
+	while (i < PLAYER_SIZE)
+	{
+		j = 0;
+		while (j < PLAYER_SIZE)
+		{
+			my_mlx_pixel_put_minimap(d, px + j, py + i, 0xFF0000);
+			j++;
+		}
+		i++;
+	}
+}
 
-    // Draw background panel so cells are visible over the scene
-    int bg_w = vis_cols * MINIMAP_CELL;
-    int bg_h = vis_rows * MINIMAP_CELL;
-    for (y = 0; y < bg_h; y++) {
-        for (x = 0; x < bg_w; x++) {
-            my_mlx_pixel_put_minimap(d, MINIMAP_X + x, MINIMAP_Y + y, 0x101010);
-        }
-    }
+void	draw_minimap(t_data *d)
+{
+	int	x;
+	int	y;
+	int	color;
+	int	cell_size;
+	int	cell_x;
+	int	cell_y;
 
-    // Draw cells
-    for (y = start_row; y <= end_row; y++)
-    {
-        for (x = start_col; x <= end_col; x++)
-        {
-            char c = d->map[y][x];
-            if (c == '1')       color = 0x666666;  // wall
-            else if (c == '0')  color = 0xBEBEBE;  // floor
-            else                color = 0x808080;  // other (door/space)
-
-            for (i = 0; i < MINIMAP_CELL; i++) {
-                for (j = 0; j < MINIMAP_CELL; j++) {
-                    my_mlx_pixel_put_minimap(
-                        d,
-                        MINIMAP_X + (x - start_col) * MINIMAP_CELL + i,
-                        MINIMAP_Y + (y - start_row) * MINIMAP_CELL + j,
-                        color
-                    );
-                }
-            }
-        }
-    }
-
-    // Draw player on top
-    int px = MINIMAP_X + (int)((d->player.fpx - start_col) * MINIMAP_CELL) - PLAYER_SIZE / 2;
-    int py = MINIMAP_Y + (int)((d->player.fpy - start_row) * MINIMAP_CELL) - PLAYER_SIZE / 2;
-
-    for (i = 0; i < PLAYER_SIZE; i++) {
-        for (j = 0; j < PLAYER_SIZE; j++) {
-            my_mlx_pixel_put_minimap(d, px + i, py + j, 0xFF0000);
-        }
-    }
+	cell_x = MAX_MINIMAP_WIDTH / d->cols;
+	cell_y = MAX_MINIMAP_HEIGHT / d->rows;
+	if (cell_x < cell_y)
+		cell_size = cell_x;
+	else
+		cell_size = cell_y;
+	if (cell_size < 1)
+		cell_size = 1;
+	y = 0;
+	while (y < d->rows)
+	{
+		x = 0;
+		while (x < d->cols)
+		{
+			if (d->map[y][x] == '1')
+				color = 0x333333;
+			else
+				color = 0xAAAAAA;
+			draw_square(d, x, y, color, cell_size);
+			x++;
+		}
+		y++;
+	}
+	draw_player(d, cell_size);
 }
