@@ -7,17 +7,24 @@
 # include <fcntl.h>
 # include <string.h>
 # include <math.h>
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include "../get_next_line/get_next_line.h"
 
 # define M_PI 3.14159265358979323846
 # define TS         64
 # define PLAYER_R   6
-# define MOVE_SPEED 8.0
-# define ROT_SPEED  0.1
+# define MOVE_SPEED 2.0
+# define ROT_SPEED  0.02
 # define EPS        1e-6
 # define FOV        1.0000000000
+# define SCREEN_WIDTH  1200
+# define SCREEN_HEIGHT 800
+#define TEX_NORTH 0
+#define TEX_SOUTH 1
+#define TEX_EAST  2
+#define TEX_WEST  3
+
 # define SCREEN_WIDTH  1920
 # define SCREEN_HEIGHT 1080
 # define MINIMAP_SIZE     200    // pixels
@@ -102,10 +109,12 @@ typedef struct s_ele_flags {
 
 typedef struct s_hit
 {
-	double dist;
-	int is_vertical;
-	double hit_x;
-	double hit_y;
+	double 	dist;
+	double 	hit_x;
+	double 	hit_y;
+	int 	is_vertical;
+	int		tex_id;
+	double  ray_angle;
 }	t_hit;
 
 typedef struct s_map {
@@ -129,11 +138,12 @@ void	count_map_dimensions(char **map, int *rows, int *cols);
 /* input */
 int		key_press(int key, void *p);
 int		key_release(int key, void *p);
-
+int		close_window(void *p);
+int		mouse_move(int x, int y, void *p);
 /* drawing */
 void	init_player_pos(t_data *data);
 void	draw_3d(t_data *d);
-void	draw_wall_3d(t_data *d, int x, double dist);
+// void	draw_wall_3d(t_data *d, int x, double dist);
 unsigned int rgb_to_hex(t_color *c);
 void my_mlx_pixel_put(char *img_adr, int x, int y, int color, int line_len, int bpp);
 

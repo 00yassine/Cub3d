@@ -17,6 +17,6 @@ libft/*.a
 # Editor settings
 .vscode/
 .idea/
-
+test*
 # Cache
 __pycache__/

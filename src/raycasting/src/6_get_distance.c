@@ -81,21 +81,22 @@ void get_distance(t_data *d, double ray_angle, t_hit *hit)
 
     y_int = get_horizontal_intercept(d->player.fpx, d->player.fpy, ray_angle);
     x_int = get_vertical_intercept(d->player.fpx, d->player.fpy, ray_angle);
-
-    while (!is_wall(d, y_int.x, y_int.y + ((sin(ray_angle) > 0) * EPS - (sin(ray_angle) <= 0) * EPS)))
+    while (!is_wall(d, y_int.x, y_int.y + ((sin(ray_angle) > 0)
+        * EPS - (sin(ray_angle) <= 0) * EPS)))
         y_int = get_next_intercept(y_int, ray_angle, 0);
-
-    while (!is_wall(d, x_int.x + ((cos(ray_angle) > 0) * EPS - (cos(ray_angle) <= 0) * EPS), x_int.y))
+    while (!is_wall(d, x_int.x + ((cos(ray_angle) > 0)
+        * EPS - (cos(ray_angle) <= 0) * EPS), x_int.y))
         x_int = get_next_intercept(x_int, ray_angle, 1);
-
     y_dist = hypot(y_int.x - d->player.fpx, y_int.y - d->player.fpy);
     x_dist = hypot(x_int.x - d->player.fpx, x_int.y - d->player.fpy);
-    hit->hit_x = x_dist;
-    hit->hit_y = y_dist;
-    hit->dist = y_dist;
-    if (y_dist >= x_dist)
+    if (y_dist < x_dist)
     {
-        hit->dist = x_dist;
-        hit->is_vertical = 1;
+        hit->hit_x = y_int.x, hit->hit_y = y_int.y;
+        hit->dist = y_dist, hit->is_vertical = 0;
+    }
+    else
+    {
+        hit->hit_x = x_int.x, hit->hit_y = x_int.y;
+        hit->dist = x_dist, hit->is_vertical = 1;
     }
 }
