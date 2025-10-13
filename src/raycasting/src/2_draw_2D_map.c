@@ -5,7 +5,7 @@
 #define MINIMAP_OFFSET_X    10
 #define MINIMAP_OFFSET_Y    10
 #define TILE_SIZE           64
-#define SCALE_FACTOR        8.0  /* divide world coords by this to scale down */
+#define SCALE_FACTOR        8.0
 
 void	my_mlx_pixel_put_minimap(t_data *d, int x, int y, int color)
 {

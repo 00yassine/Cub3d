@@ -80,6 +80,6 @@ t_map	*parce(char **map)
 	if (check_map_structer(map_list, map_list->all_content) != 1)
 		print_error("Error: some of the info are not there.", 15);
 	fill_player_str(map_list);
-	validate_map(map_list->all_content);
+	validate_map(map_list);
 	return (map_list);
 }
