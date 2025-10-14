@@ -1,0 +1,226 @@
+===============================================================================
+                            MLX FUNCTIONS REFERENCE
+                          Used in cub3d_main/1_init.c
+===============================================================================
+
+🎯 CORE MLX FUNCTIONS
+=====================
+
+1. mlx_init()
+-------------
+Prototype: void *mlx_init(void);
+Purpose: Initializes the MLX library connection to the X-Window system
+Returns: MLX instance pointer (mlx_ptr) or NULL if failed
+Usage: Must be called first before any other MLX function
+Your code: data->mlx_ptr = mlx_init();
+Notes: 
+- Essential first step for any MLX program
+- Creates connection to X11 display server
+- Handle errors by checking for NULL return
+
+2. mlx_new_window()
+------------------
+Prototype: void *mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title);
+Purpose: Creates a new window
+Parameters:
+  - mlx_ptr: MLX instance from mlx_init()
+  - size_x: Window width in pixels
+  - size_y: Window height in pixels  
+  - title: Window title string
+Returns: Window pointer or NULL if failed
+Your code: mlx_new_window(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
+Notes:
+- Creates 1200x800 window titled "cub3d"
+- Window appears on screen immediately
+- Must save returned pointer for other functions
+
+===============================================================================
+
+🖼️ IMAGE MANAGEMENT FUNCTIONS
+==============================
+
+3. mlx_new_image()
+-----------------
+Prototype: void *mlx_new_image(void *mlx_ptr, int width, int height);
+Purpose: Creates a new image in memory
+Parameters:
+  - mlx_ptr: MLX instance
+  - width: Image width in pixels
+  - height: Image height in pixels
+Returns: Image pointer or NULL if failed
+Your code: mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+Notes:
+- Creates main rendering buffer (1200x800)
+- Image exists in memory only until displayed
+- Used for double buffering technique
+
+4. mlx_get_data_addr()
+---------------------
+Prototype: char *mlx_get_data_addr(void *img_ptr, int *bits_per_pixel, 
+                                   int *size_line, int *endian);
+Purpose: Gets direct access to image pixel data
+Parameters:
+  - img_ptr: Image pointer from mlx_new_image()
+  - bits_per_pixel: Pointer to store bits per pixel (usually 32)
+  - size_line: Pointer to store bytes per line
+  - endian: Pointer to store endianness (0=little, 1=big)
+Returns: Pointer to pixel data array
+Your code: mlx_get_data_addr(data->img, &data->bpp, &data->line_len, &data->endian);
+Notes:
+- Enables direct pixel manipulation
+- Critical for fast rendering
+- Used for both main image and textures
+
+5. mlx_xpm_file_to_image()
+-------------------------
+Prototype: void *mlx_xpm_file_to_image(void *mlx_ptr, char *filename, 
+                                       int *width, int *height);
+Purpose: Loads XPM image file into MLX image
+Parameters:
+  - mlx_ptr: MLX instance
+  - filename: Path to XPM file
+  - width: Pointer to store image width
+  - height: Pointer to store image height
+Returns: Image pointer or NULL if failed
+Your code: 
+- North: "textures/AnyConv.com__bluestone.xpm"
+- South: "textures/AnyConv.com__colorstone.xpm"
+- East: "textures/AnyConv.com__eagle.xpm"
+- West: "textures/AnyConv.com__greystone.xpm"
+Notes:
+- XPM files must be valid format
+- Automatically determines image dimensions
+- Used for wall textures in raycasting
+
+===============================================================================
+
+🎮 EVENT MANAGEMENT FUNCTIONS
+=============================
+
+6. mlx_hook()
+------------
+Prototype: int mlx_hook(void *win_ptr, int x_event, int x_mask, 
+                        int (*funct)(), void *param);
+Purpose: Registers event handlers for window events
+Parameters:
+  - win_ptr: Window pointer
+  - x_event: X11 event type number
+  - x_mask: X11 event mask
+  - funct: Callback function pointer
+  - param: Data to pass to callback
+Your Events:
+  - Event 2, Mask 1L<<0: KeyPress → key_press()
+  - Event 3, Mask 1L<<1: KeyRelease → key_release()
+  - Event 17, Mask 0: ClientMessage/Close → close_window()
+  - Event 6, Mask 1L<<6: MotionNotify/Mouse → mouse_move()
+Notes:
+- Handles keyboard and mouse input
+- Window close button handling
+- Essential for interactive programs
+
+7. mlx_loop_hook()
+-----------------
+Prototype: int mlx_loop_hook(void *mlx_ptr, int (*funct)(), void *param);
+Purpose: Registers function to call repeatedly during main loop
+Parameters:
+  - mlx_ptr: MLX instance
+  - funct: Function to call each frame
+  - param: Data to pass to function
+Your code: mlx_loop_hook(data->mlx_ptr, update_loop, data);
+Notes:
+- Calls update_loop() every frame
+- Used for game logic and rendering
+- Runs continuously until program exits
+
+8. mlx_mouse_hide()
+------------------
+Prototype: int mlx_mouse_hide(void *mlx_ptr, void *win_ptr);
+Purpose: Hides the mouse cursor in the specified window
+Parameters:
+  - mlx_ptr: MLX instance
+  - win_ptr: Window pointer
+Returns: 0 on success
+Your code: mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
+Notes:
+- Hides cursor for FPS-style mouse look
+- Improves immersion in 3D games
+- Can be toggled on/off as needed
+
+===============================================================================
+
+🔧 TYPICAL USAGE PATTERN
+========================
+
+1. INITIALIZE
+   mlx_init() → mlx_new_window()
+
+2. CREATE IMAGES
+   mlx_new_image() → mlx_get_data_addr()
+
+3. LOAD TEXTURES
+   mlx_xpm_file_to_image() → mlx_get_data_addr()
+
+4. SETUP EVENTS
+   Multiple mlx_hook() calls for different events
+
+5. SETUP LOOP
+   mlx_loop_hook() for continuous updates
+
+6. HIDE CURSOR
+   mlx_mouse_hide() for FPS experience
+
+7. START
+   mlx_loop() - starts the main event loop (called elsewhere)
+
+===============================================================================
+
+💡 IMPORTANT NOTES
+==================
+
+✅ ERROR HANDLING
+- Always check return values for NULL
+- Memory allocation can fail
+- File loading can fail
+
+✅ INITIALIZATION ORDER
+- Call mlx_init() first before any other MLX function
+- Create window before creating images
+- Load textures after MLX initialization
+
+✅ MEMORY MANAGEMENT
+- Free resources properly when done:
+  * mlx_destroy_image() for images
+  * mlx_destroy_window() for windows
+  * mlx_destroy_display() for MLX instance
+
+✅ FILE FORMATS
+- XPM files must be valid format for texture loading
+- Check file paths are correct
+- Ensure textures exist before loading
+
+✅ PERFORMANCE
+- Use mlx_get_data_addr() for fast pixel access
+- Double buffering with mlx_put_image_to_window()
+- Minimize MLX function calls in render loop
+
+===============================================================================
+
+📚 ADDITIONAL MLX FUNCTIONS (Not used in your code but useful)
+==============================================================
+
+- mlx_put_image_to_window(): Display image buffer to window
+- mlx_pixel_put(): Put single pixel (slow, avoid in loops)
+- mlx_string_put(): Draw text to window
+- mlx_loop(): Start main event loop
+- mlx_destroy_image(): Free image memory
+- mlx_destroy_window(): Close window
+- mlx_destroy_display(): Clean up MLX instance
+- mlx_mouse_show(): Show hidden mouse cursor
+- mlx_clear_window(): Clear window content
+- mlx_mouse_get_pos(): Get current mouse position
+
+===============================================================================
+Created for: cub3d project
+File: src/raycasting/src/1_init.c
+Date: October 13, 2025
+===============================================================================

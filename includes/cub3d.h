@@ -148,4 +148,9 @@ void	skip_spaces(char *str, int *i);
 /* utils */
 void	print_error(char *error, int exitcode);
 
+/* cleanup */
+void	cleanup_data(t_data *data);
+void	cleanup_map(t_map *map);
+void	free_2d_array(char **arr);
+
 #endif
