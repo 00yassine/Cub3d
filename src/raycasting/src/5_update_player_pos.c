@@ -72,6 +72,7 @@ int update_loop(void *p)
 	handle_rotation(d);
 	clear_img(d);
 	draw_3d(d);
+	draw_minimap(d);
 	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img, 0, 0);
 	return (0);
 }
