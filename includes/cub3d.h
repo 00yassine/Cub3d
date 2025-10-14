@@ -25,22 +25,6 @@
 #define TEX_EAST  2
 #define TEX_WEST  3
 
-# define SCREEN_WIDTH  1920
-# define SCREEN_HEIGHT 1080
-# define MINIMAP_SIZE     200    // pixels
-# define MINIMAP_SCALE    8      // pixels per map cell
-# define MINIMAP_RANGE    6
-# define WIDTH 800
-# define HEIGHT 600
-
-typedef struct s_anime
-{
-	void	*mlx;
-	void	*win;
-	void	*frames[4]; // animation frames
-	int		current_frame;
-	int		frame_delay;
-}	t_anime;
 typedef struct s_point {
 	double x;
 	double y;
@@ -168,13 +152,5 @@ void	print_error(char *error, int exitcode);
 void	cleanup_data(t_data *data);
 void	cleanup_map(t_map *map);
 void	free_2d_array(char **arr);
-
-/* minimap */
-// int	render_frame(t_data *d);
-void draw_minimap(t_data *d);
-
-//animation
-void	load_animation(t_data *d);
-int		render_next_frame(t_data *d);
 
 #endif
