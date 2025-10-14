@@ -1,6 +1,6 @@
 #include "../../../includes/cub3d.h"
 
-char **extract_map_from_parsed_data(char **all_content)
+char	**extract_map_from_parsed_data(char **all_content)
 {
 	int i = 0;
 	int start = -1;
@@ -43,11 +43,10 @@ char **extract_map_from_parsed_data(char **all_content)
 	return (map);
 }
 
-void count_map_dimensions(char **map, int *rows, int *cols)
+void	count_map_dimensions(char **map, int *rows, int *cols)
 {
 	*rows = 0;
 	*cols = 0;
-
 	while (map[*rows])
 	{
 		int len = ft_strlen(map[*rows]) - 1;
@@ -56,9 +55,12 @@ void count_map_dimensions(char **map, int *rows, int *cols)
 		(*rows)++;
 	}
 }
+
 void	init_textures(t_data *d)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	d->tex[TEX_NORTH].img = mlx_xpm_file_to_image(d->mlx_ptr,
 		"textures/AnyConv.com__bluestone.xpm",&d->tex[TEX_NORTH].width, &d->tex[TEX_NORTH].height);
 	d->tex[TEX_SOUTH].img = mlx_xpm_file_to_image(d->mlx_ptr,
@@ -67,7 +69,6 @@ void	init_textures(t_data *d)
 		 "textures/AnyConv.com__eagle.xpm", &d->tex[TEX_EAST].width, &d->tex[TEX_EAST].height);
 	d->tex[TEX_WEST].img = mlx_xpm_file_to_image(d->mlx_ptr,
 		 "textures/AnyConv.com__greystone.xpm", &d->tex[TEX_WEST].width, &d->tex[TEX_WEST].height);
-
 	while (i < 4)
 	{
 		d->tex[i].addr = mlx_get_data_addr(d->tex[i].img, &d->tex[i].bpp, &d->tex[i].line_len, &d->endian);
