@@ -14,7 +14,7 @@
 
 static char **fill_map_array(char **map, char **all_content, int start, int count);
 
-char **extract_map_from_parsed_data(char **all_content)
+char	**extract_map_from_parsed_data(char **all_content)
 {
 	int i;
 	int start;
@@ -63,7 +63,7 @@ static char **fill_map_array(char **map, char **all_content, int start, int coun
 	return (map);
 }
 
-void count_map_dimensions(char **map, int *rows, int *cols)
+void	count_map_dimensions(char **map, int *rows, int *cols)
 {
 	int len;
 
@@ -80,9 +80,10 @@ void count_map_dimensions(char **map, int *rows, int *cols)
 	}
 }
 
-void init_textures(t_data *d)
+
+void	init_textures(t_data *d)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	d->tex[TEX_NORTH].img = mlx_xpm_file_to_image(d->mlx_ptr,

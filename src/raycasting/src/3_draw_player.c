@@ -2,7 +2,9 @@
 
 void init_player_pos(t_data *data)
 {
-	int r = 0;
+	int	r;
+
+	r = 0;
 	while (r < data->rows)
 	{
 		int c = 0;

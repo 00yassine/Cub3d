@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   5_update_player_pos.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/14 10:36:35 by ykabili-          #+#    #+#             */
+/*   Updated: 2025/10/14 10:37:03 by ykabili-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../includes/cub3d.h"
 
 static void	clear_img(t_data *d)
@@ -14,20 +26,16 @@ static void	move(t_data *d, double angle)
 
 	new_x = d->player.fpx + cos(angle) * MOVE_SPEED * d->speed;
 	new_y = d->player.fpy + sin(angle) * MOVE_SPEED * d->speed;
-
 	offset_x = 5;
 	if (cos(angle) < 0)
 		offset_x = -5;
 	offset_y = 5;
 	if (sin(angle) < 0)
 		offset_y = -5;
-
 	if (!is_wall(d, new_x + offset_x, d->player.fpy))
 		d->player.fpx = new_x;
-
 	if (!is_wall(d, d->player.fpx, new_y + offset_y))
 		d->player.fpy = new_y;
-
 	d->player.x = (int)round(d->player.fpx);
 	d->player.y = (int)round(d->player.fpy);
 }
@@ -44,10 +52,9 @@ static void	handle_movement(t_data *d)
 		move(d, d->player.angle + M_PI / 2);
 }
 
-
 static void	handle_rotation(t_data *d)
 {
-	int dir;
+	int	dir;
 
 	dir = 0;
 	if (d->input.k_right)
@@ -63,11 +70,11 @@ static void	handle_rotation(t_data *d)
 		d->player.angle += 2 * M_PI;
 }
 
-int update_loop(void *p)
+int	update_loop(void *p)
 {
-	t_data *d;
+	t_data	*d;
 
-	d = (t_data*)p;
+	d = (t_data *)p;
 	handle_movement(d);
 	handle_rotation(d);
 	clear_img(d);

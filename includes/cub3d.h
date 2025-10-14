@@ -20,10 +20,15 @@
 # define FOV        1.0000000000
 # define SCREEN_WIDTH  1200
 # define SCREEN_HEIGHT 800
-#define TEX_NORTH 0
-#define TEX_SOUTH 1
-#define TEX_EAST  2
-#define TEX_WEST  3
+
+# define TEX_NORTH 0
+# define TEX_SOUTH 1
+# define TEX_EAST  2
+# define TEX_WEST  3
+# define MINIMAP_SCALE    8
+# define MINIMAP_RANGE    6
+# define WIDTH 800
+# define HEIGHT 600
 
 typedef struct s_point {
 	double x;
@@ -138,7 +143,7 @@ int		is_wall(t_data *d, double x, double y);
 /* parsing */
 t_map	*parce(char **map);
 void	struct_initializer(t_map *map);
-void	validate_map(char **map);
+void	validate_map(t_map *map);
 int		is_map_line(char *line);
 t_color	ft_nb_take(char *str, int i);
 int		ft_atoi_skip(char *str, int *i);
