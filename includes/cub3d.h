@@ -132,8 +132,9 @@ int		mouse_move(int x, int y, void *p);
 /* drawing */
 void	init_player_pos(t_data *data);
 void	draw_3d(t_data *d);
-// void	draw_wall_3d(t_data *d, int x, double dist);
-unsigned int rgb_to_hex(t_color *c);
+void draw_minimap(t_data *d);
+	// void	draw_wall_3d(t_data *d, int x, double dist);
+	unsigned int rgb_to_hex(t_color *c);
 void my_mlx_pixel_put(char *img_adr, int x, int y, int color, int line_len, int bpp);
 
 /* raycasting */
