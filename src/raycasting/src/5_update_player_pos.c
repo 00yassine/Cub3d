@@ -6,7 +6,7 @@
 /*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:36:35 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/14 10:37:03 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/14 13:28:30 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	update_loop(void *p)
 	handle_rotation(d);
 	clear_img(d);
 	draw_3d(d);
+	draw_minimap(d);
 	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img, 0, 0);
 	return (0);
 }

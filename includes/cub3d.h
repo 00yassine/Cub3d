@@ -157,5 +157,6 @@ void	print_error(char *error, int exitcode);
 void	cleanup_data(t_data *data);
 void	cleanup_map(t_map *map);
 void	free_2d_array(char **arr);
-
+/*drawing minimap*/
+void	draw_minimap(t_data *d);
 #endif
