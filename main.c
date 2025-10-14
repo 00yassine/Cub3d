@@ -33,17 +33,35 @@ int	main(int ac, char **av)
 	int		i;
 	int		len;
 
-	i = 0;
-	len = count_lines(av[1]);
-	map = malloc(sizeof(char *) * len);
 	if (ac != 2)
 		print_error("Error: the number of arguments is not valid", 6);
-	fd = open(av[1],O_RDONLY);
-	if (fd < 0)
+	
+	len = count_lines(av[1]);
+	if (len < 0)
 		print_error("Error: cannot open file", 5);
+		
+	map = malloc(sizeof(char *) * (len + 1));
+	if (!map)
+		print_error("Error: memory allocation failed", 7);
+	
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0)
+	{
+		free(map);
+		print_error("Error: cannot open file", 5);
+	}
+	
+	i = 0;
 	while((map[i] = get_next_line(fd)) != NULL)
 		i++;
+	map[i] = NULL;
+	close(fd);
+	
 	parsed_map = parce(map);
 	start(parsed_map);
+	
+	cleanup_map(parsed_map);
+	free_2d_array(map);
+	
 	return (0);
 }

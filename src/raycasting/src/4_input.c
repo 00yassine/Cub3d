@@ -14,10 +14,9 @@
 
 int	key_press(int key, void *p)
 {
-	t_data	*d;
-
-	d = (t_data *)p;
-	if (key == 65307) exit(0);
+	t_data *d = (t_data*)p;
+	if (key == 65307)
+		cleanup_data(d), exit(0);
 	if (key == 119) d->input.k_up = 1;
 	if (key == 115) d->input.k_down = 1;
 	if (key == 97) d->input.k_view_left = 1;
@@ -45,7 +44,9 @@ int	key_release(int key, void *p)
 
 int	close_window(void *p)
 {
-	(void)p;
+	t_data *data = (t_data *)p;
+	
+	cleanup_data(data);
 	exit(0);
 	return (0);
 }

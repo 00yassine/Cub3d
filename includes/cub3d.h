@@ -20,6 +20,7 @@
 # define FOV        1.0000000000
 # define SCREEN_WIDTH  1200
 # define SCREEN_HEIGHT 800
+
 # define TEX_NORTH 0
 # define TEX_SOUTH 1
 # define TEX_EAST  2
@@ -152,12 +153,9 @@ void	skip_spaces(char *str, int *i);
 /* utils */
 void	print_error(char *error, int exitcode);
 
-/* minimap */
-// int	render_frame(t_data *d);
-void draw_minimap(t_data *d);
-
-//animation
-void	load_animation(t_data *d);
-int		render_next_frame(t_data *d);
+/* cleanup */
+void	cleanup_data(t_data *data);
+void	cleanup_map(t_map *map);
+void	free_2d_array(char **arr);
 
 #endif

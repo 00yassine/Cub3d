@@ -74,10 +74,10 @@ static void	draw_wall_3d(t_data *d, int x, t_hit *hit)
 
 void	draw_3d(t_data *d)
 {
-	t_hit	hit;
-	double	step = FOV / (double)SCREEN_WIDTH;
-	double	start_angle = d->player.angle - FOV / 2.0 + step / 2.0;
-	double	cur_angle = start_angle;
+	t_hit 	hit;
+	double 	step = FOV / (double)SCREEN_WIDTH;
+	double 	start_angle = d->player.angle - FOV / 2.0 + step / 2.0;
+	double 	cur_angle = start_angle;
 	int	x = 0;
 
 	while (x < SCREEN_WIDTH)
