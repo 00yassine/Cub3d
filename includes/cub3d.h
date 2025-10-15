@@ -68,6 +68,34 @@ typedef struct s_tex
 	int		height;
 }	t_tex;
 
+typedef struct s_draw_minimap
+{
+	int		x;
+	int		y;
+	int		color;
+	double	player_x;
+	double	player_y;
+	double	map_x;
+	double	map_y;
+	double	tile_x;
+	double	tile_y;
+	double	cell;
+}	t_draw_minimap;
+
+typedef struct s_draw_dir
+{
+	double	dir_len;
+	double	start_x;
+	double	start_y;
+	double	end_x;
+	double	end_y;
+	double	dx;
+	double	dy;
+	double	steps;
+	double	x_inc;
+	double	y_inc;
+	int		i;
+}	t_draw_dir;
 typedef struct s_data {
 	int			rows;
 	int			cols;
@@ -159,4 +187,6 @@ void	cleanup_map(t_map *map);
 void	free_2d_array(char **arr);
 /*drawing minimap*/
 void	draw_minimap(t_data *d);
+void	draw_player_mini(t_data *d);
+void	my_mlx_pixel_put_minimap(t_data *d, int x, int y, int color);
 #endif
