@@ -12,12 +12,12 @@
 
 #include "../../../includes/cub3d.h"
 
-#define MINIMAP_SIZE		200
-#define PLAYER_SIZE			4
+#define MINIMAP_SIZE		300
+#define PLAYER_SIZE			8
 #define MINIMAP_OFFSET_X	10
 #define MINIMAP_OFFSET_Y	10
 #define TILE_SIZE			64
-#define SCALE_FACTOR		8.0
+#define SCALE_FACTOR		4.0
 
 void	my_mlx_pixel_put_minimap(t_data *d, int x, int y, int color)
 {
@@ -70,7 +70,7 @@ static void	draw_player_dir(t_data *d)
 	r.i = 0;
 	while (r.i <= r.steps)
 	{
-		my_mlx_pixel_put_minimap(d, (int)r.start_x, (int)r.start_y, 0x00FF00);
+		my_mlx_pixel_put_minimap(d, (int)r.start_x, (int)r.start_y, 0xEEEEEE);
 		r.start_x += r.x_inc;
 		r.start_y += r.y_inc;
 		r.i++;
@@ -85,7 +85,7 @@ static void	draw_minimap_cell(t_data *d, t_draw_minimap *m)
 		|| m->tile_y > MINIMAP_OFFSET_Y + MINIMAP_SIZE)
 		return ;
 	if (d->map[m->y][m->x] == '1')
-		m->color = 0xFAB12F;
+		m->color = 0x000000;
 	else
 		m->color = 0x5C3E94;
 	draw_square(d, m);

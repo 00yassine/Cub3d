@@ -6,14 +6,14 @@
 /*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 11:57:53 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/15 11:57:54 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:33:19 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-#define MINIMAP_SIZE		200
-#define PLAYER_SIZE			4
+#define MINIMAP_SIZE		300
+#define PLAYER_SIZE			8
 #define MINIMAP_OFFSET_X	10
 #define MINIMAP_OFFSET_Y	10
 
@@ -32,7 +32,7 @@ void	draw_player_mini(t_data *d)
 		j = 0;
 		while (j < PLAYER_SIZE)
 		{
-			my_mlx_pixel_put_minimap(d, cx + j, cy + i, 0xFBF3D1);
+			my_mlx_pixel_put_minimap(d, cx + j, cy + i, 0xFF0000);
 			j++;
 		}
 		i++;

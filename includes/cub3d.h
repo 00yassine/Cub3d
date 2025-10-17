@@ -18,8 +18,8 @@
 # define ROT_SPEED  0.02
 # define EPS        1e-6
 # define FOV        1.0000000000
-# define SCREEN_WIDTH  1200
-# define SCREEN_HEIGHT 800
+# define SCREEN_WIDTH  2000
+# define SCREEN_HEIGHT 1200
 
 # define TEX_NORTH 0
 # define TEX_SOUTH 1
