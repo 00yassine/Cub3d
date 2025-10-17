@@ -85,9 +85,9 @@ static void	draw_minimap_cell(t_data *d, t_draw_minimap *m)
 		|| m->tile_y > MINIMAP_OFFSET_Y + MINIMAP_SIZE)
 		return ;
 	if (d->map[m->y][m->x] == '1')
-		m->color = 0x000000;
+		m->color = 0xEEEEEE;
 	else
-		m->color = 0x5C3E94;
+		m->color = 0x000000;
 	draw_square(d, m);
 }
 
