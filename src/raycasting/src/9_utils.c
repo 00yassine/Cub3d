@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   9_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:27:33 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/14 10:28:15 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/22 09:47:27 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,12 @@ int	is_wall(t_data *d, double x, double y)
 	if (map_x < 0 || map_y < 0 || map_x >= d->cols || map_y >= d->rows)
 		return (1);
 	return (d->map[map_y][map_x] == '1');
+}
+
+void	set_vertical_hit(t_hit *hit, t_point x_int, double x_dist)
+{
+	hit->hit_x = x_int.x;
+	hit->hit_y = x_int.y;
+	hit->dist = x_dist;
+	hit->is_vertical = 1;
 }

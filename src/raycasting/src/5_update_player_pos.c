@@ -6,7 +6,7 @@
 /*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:36:35 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/14 12:13:37 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/22 12:06:26 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,12 @@ static void	move(t_data *d, double angle)
 {
 	double	new_x;
 	double	new_y;
-	double	offset_x;
-	double	offset_y;
 
 	new_x = d->player.fpx + cos(angle) * MOVE_SPEED * d->speed;
 	new_y = d->player.fpy + sin(angle) * MOVE_SPEED * d->speed;
-	offset_x = 5;
-	if (cos(angle) < 0)
-		offset_x = -5;
-	offset_y = 5;
-	if (sin(angle) < 0)
-		offset_y = -5;
-	if (!is_wall(d, new_x + offset_x, d->player.fpy))
+	if (!is_wall(d, new_x, d->player.fpy))
 		d->player.fpx = new_x;
-	if (!is_wall(d, d->player.fpx, new_y + offset_y))
+	if (!is_wall(d, d->player.fpx, new_y))
 		d->player.fpy = new_y;
 	d->player.x = (int)round(d->player.fpx);
 	d->player.y = (int)round(d->player.fpy);
@@ -73,12 +65,14 @@ static void	handle_rotation(t_data *d)
 int	update_loop(void *p)
 {
 	t_data	*d;
+	int		x;
 
+	x = 0;
 	d = (t_data *)p;
 	handle_movement(d);
 	handle_rotation(d);
 	clear_img(d);
-	draw_3d(d);
+	draw_3d(d, x);
 	draw_minimap(d);
 	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img, 0, 0);
 	return (0);
