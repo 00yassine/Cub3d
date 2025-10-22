@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cub3D Raycasting Flowcharts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-button {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .tab-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .tab-button.active {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .flowchart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+        }
+
+        .flowchart-container.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .flowchart-title {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .flowchart-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .svg-wrapper {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 20px;
+            overflow: auto;
+            max-height: 80vh;
+        }
+
+        .svg-wrapper svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .control-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .control-button:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+
+        .legend {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .legend h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .legend-item {
+            display: inline-block;
+            margin: 5px 15px 5px 0;
+            font-size: 0.9em;
+        }
+
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+
+            .flowchart-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Cub3D Raycasting Flowcharts</h1>
+            <p class="subtitle">Interactive Visual Guide to Understanding Raycasting</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-button active" onclick="showFlowchart('system')">
+                📊 System Overview
+            </button>
+            <button class="tab-button" onclick="showFlowchart('dda')">
+                🎯 DDA Algorithm
+            </button>
+            <button class="tab-button" onclick="showFlowchart('texture')">
+                🎨 Texture Mapping
+            </button>
+            <button class="tab-button" onclick="showFlowchart('problems')">
+                ⚠️ Problems & Solutions
+            </button>
+            <button class="tab-button" onclick="showFlowchart('visualization')">
+                🌟 Full Visualization
+            </button>
+        </div>
+
+        <!-- System Overview -->
+        <div id="system" class="flowchart-container active">
+            <h2 class="flowchart-title">📊 System Overview</h2>
+            <p class="flowchart-description">Complete main loop showing initialization, hooks, 60 FPS game loop, and cleanup.</p>
+            <div class="svg-wrapper">
+                <object data="01_system_overview.svg" type="image/svg+xml" width="100%"></object>
+            </div>
+            <div class="legend">
+                <h3>Components:</h3>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #4a90e2;"></span> Initialization
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #7ed321;"></span> Process
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #f5a623;"></span> Decision
+                </span>
+            </div>
+        </div>
+
+        <!-- DDA Algorithm -->
+        <div id="dda" class="flowchart-container">
+            <h2 class="flowchart-title">🎯 DDA Algorithm</h2>
+            <p class="flowchart-description">Digital Differential Analysis - Ray-wall intersection detection with horizontal and vertical ray casting.</p>
+            <div class="svg-wrapper">
+                <object data="02_dda_algorithm.svg" type="image/svg+xml" width="100%"></object>
+            </div>
+            <div class="legend">
+                <h3>Steps:</h3>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #f5a623;"></span> Horizontal Ray
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #7ed321;"></span> Vertical Ray
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #bd10e0;"></span> Ray Marching
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #ff6b6b;"></span> Fisheye Correction
+                </span>
+            </div>
+        </div>
+
+        <!-- Texture Mapping -->
+        <div id="texture" class="flowchart-container">
+            <h2 class="flowchart-title">🎨 Texture Mapping</h2>
+            <p class="flowchart-description">From 3D world coordinates to 2D screen pixels - wall height, texture selection, and column rendering.</p>
+            <div class="svg-wrapper">
+                <object data="03_texture_mapping.svg" type="image/svg+xml" width="100%"></object>
+            </div>
+            <div class="legend">
+                <h3>Process:</h3>
+                <span class="legend-item">Wall Height → Draw Limits → Texture Selection → Column Rendering</span>
+            </div>
+        </div>
+
+        <!-- Problems & Solutions -->
+        <div id="problems" class="flowchart-container">
+            <h2 class="flowchart-title">⚠️ Common Problems & Solutions</h2>
+            <p class="flowchart-description">6 common issues in raycasting with their fixes: fisheye effect, division by zero, wall gaps, wrong textures, collision issues, and memory leaks.</p>
+            <div class="svg-wrapper">
+                <object data="04_problems_solutions.svg" type="image/svg+xml" width="100%"></object>
+            </div>
+            <div class="legend">
+                <h3>Issues Covered:</h3>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #ff6b6b;"></span> Problem
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #51cf66;"></span> Solution
+                </span>
+            </div>
+        </div>
+
+        <!-- Full Visualization -->
+        <div id="visualization" class="flowchart-container">
+            <h2 class="flowchart-title">🌟 Full Visualization</h2>
+            <p class="flowchart-description">Complete raycasting scene with top-down map, player FOV, multiple rays, and resulting 3D view.</p>
+            <div class="svg-wrapper">
+                <object data="05_visualization.svg" type="image/svg+xml" width="100%"></object>
+            </div>
+            <div class="legend">
+                <h3>Legend:</h3>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #4dabf7;"></span> Rays
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #ff6b6b;"></span> Player
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #868e96;"></span> Walls
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #ffd43b;"></span> Hit Points
+                </span>
+            </div>
+        </div>
+
+        <footer>
+            <p>📚 Part of Cub3D Raycasting Documentation</p>
+            <p>Created for 42 Students | October 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        function showFlowchart(id) {
+            // Hide all flowcharts
+            document.querySelectorAll('.flowchart-container').forEach(container => {
+                container.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected flowchart
+            document.getElementById(id).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const flowcharts = ['system', 'dda', 'texture', 'problems', 'visualization'];
+            const current = document.querySelector('.flowchart-container.active').id;
+            const currentIndex = flowcharts.indexOf(current);
+
+            if (e.key === 'ArrowRight' && currentIndex < flowcharts.length - 1) {
+                const buttons = document.querySelectorAll('.tab-button');
+                buttons[currentIndex + 1].click();
+            } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                const buttons = document.querySelectorAll('.tab-button');
+                buttons[currentIndex - 1].click();
+            }
+        });
+
+        console.log('🎨 Cub3D Flowcharts Loaded!');
+        console.log('💡 Tip: Use arrow keys to navigate between flowcharts');
+    </script>
+</body>
+</html>
