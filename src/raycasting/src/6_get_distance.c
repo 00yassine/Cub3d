@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   6_get_distance.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:33:24 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/14 10:35:45 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/22 09:09:42 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,41 @@ static t_point	get_vertical_intercept(double x, double y, double ray_angle)
 	return (intercept);
 }
 
-t_point	get_next_intercept(t_point current, double ray_angle, int vertical)
+static t_point	get_next_horizontal(t_point current, double ray_angle)
 {
 	t_point	next;
 	double	step_y;
 	double	step_x;
 
-	if (!vertical)
-	{
-		if (sin(ray_angle) > 0)
-			step_y = TS;
-		else
-			step_y = -TS;
-		if (fabs(tan(ray_angle)) < 1e-9)
-			step_x = 0;
-		else
-			step_x = step_y / tan(ray_angle);
-		next.x = current.x + step_x;
-		next.y = current.y + step_y;
-	}
+	if (sin(ray_angle) > 0)
+		step_y = TS;
 	else
-	{
-		if (cos(ray_angle) > 0)
-			step_x = TS;
-		else
-			step_x = -TS;
-		if (fabs(tan(ray_angle)) < 1e-9)
-			step_y = 0;
-		else
-			step_y = step_x * tan(ray_angle);
-		next.x = current.x + step_x;
-		next.y = current.y + step_y;
-	}
+		step_y = -TS;
+	if (fabs(tan(ray_angle)) < 1e-9)
+		step_x = 0;
+	else
+		step_x = step_y / tan(ray_angle);
+	next.x = current.x + step_x;
+	next.y = current.y + step_y;
+	return (next);
+}
+
+static t_point	get_next_vertical(t_point current, double ray_angle)
+{
+	t_point	next;
+	double	step_y;
+	double	step_x;
+
+	if (cos(ray_angle) > 0)
+		step_x = TS;
+	else
+		step_x = -TS;
+	if (fabs(tan(ray_angle)) < 1e-9)
+		step_y = 0;
+	else
+		step_y = step_x * tan(ray_angle);
+	next.x = current.x + step_x;
+	next.y = current.y + step_y;
 	return (next);
 }
 
@@ -96,20 +99,19 @@ void	get_distance(t_data *d, double ray_angle, t_hit *hit)
 	x_int = get_vertical_intercept(d->player.fpx, d->player.fpy, ray_angle);
 	while (!is_wall(d, y_int.x, y_int.y + ((sin(ray_angle) > 0)
 				* EPS - (sin(ray_angle) <= 0) * EPS)))
-		y_int = get_next_intercept(y_int, ray_angle, 0);
+		y_int = get_next_horizontal(y_int, ray_angle);
 	while (!is_wall(d, x_int.x + ((cos(ray_angle) > 0)
 				* EPS - (cos(ray_angle) <= 0) * EPS), x_int.y))
-		x_int = get_next_intercept(x_int, ray_angle, 1);
+		x_int = get_next_vertical(x_int, ray_angle);
 	y_dist = hypot(y_int.x - d->player.fpx, y_int.y - d->player.fpy);
 	x_dist = hypot(x_int.x - d->player.fpx, x_int.y - d->player.fpy);
 	if (y_dist < x_dist)
 	{
-		hit->hit_x = y_int.x, hit->hit_y = y_int.y;
-		hit->dist = y_dist, hit->is_vertical = 0;
+		hit->hit_x = y_int.x;
+		hit->hit_y = y_int.y;
+		hit->dist = y_dist;
+		hit->is_vertical = 0;
 	}
 	else
-	{
-		hit->hit_x = x_int.x, hit->hit_y = x_int.y;
-		hit->dist = x_dist, hit->is_vertical = 1;
-	}
+		set_vertical_hit(hit, x_int, x_dist);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/22 12:01:52 by elkharti          #+#    #+#             */
+/*   Updated: 2025/10/22 12:03:34 by elkharti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	free_2d_array(char **arr)
@@ -17,15 +29,15 @@ void	free_2d_array(char **arr)
 
 void	cleanup_data(t_data *data)
 {
+	int	i;
+
 	if (!data)
 		return ;
-
 	if (data->map)
 		free_2d_array(data->map);
-
 	if (data->mlx_ptr)
 	{
-		int i = 0;
+		i = 0;
 		while (i < 4)
 		{
 			if (data->tex[i].img)
@@ -55,6 +67,5 @@ void	cleanup_map(t_map *map)
 		free(map->we_player);
 	if (map->ea_player)
 		free(map->ea_player);
-
 	free(map);
 }
