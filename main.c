@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 15:47:36 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/24 16:13:29 by ykabili-         ###   ########.fr       */
+/*   Created: 2025/10/24 16:35:46 by elkharti          #+#    #+#             */
+/*   Updated: 2025/10/24 16:53:11 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ int	count_lines(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (-1);
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line)
 	{
 		free(line);
 		count++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (count);
@@ -38,34 +40,42 @@ void	print_error(char *error, int exitcode)
 	exit(exitcode);
 }
 
-int	main(int ac, char **av)
+char	**load_map_from_file(char *filename)
 {
 	int		fd;
 	char	**map;
-	t_map	*parsed_map;
-	int		i;
 	int		len;
+	char	*line;
 
-	if (ac != 2)
-		print_error("Error: the number of arguments is not valid", 6);
-	ft_ex_checker(av[1]);
-	len = count_lines(av[1]);
+	len = count_lines(filename);
 	if (len < 0)
 		print_error("Error: cannot open file", 5);
 	map = malloc(sizeof(char *) * (len + 1));
 	if (!map)
 		print_error("Error: memory allocation failed", 7);
-	fd = open(av[1], O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+		(free(map), print_error("Error: cannot open file", 5));
+	len = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		free(map);
-		print_error("Error: cannot open file", 5);
+		map[len++] = line;
+		line = get_next_line(fd);
 	}
-	i = 0;
-	while ((map[i] = get_next_line(fd)) != NULL)
-		i++;
-	map[i] = NULL;
+	map[len] = NULL;
 	close(fd);
+	return (map);
+}
+
+int	main(int ac, char **av)
+{
+	char	**map;
+	t_map	*parsed_map;
+
+	if (ac != 2)
+		print_error("Error: the number of arguments is not valid", 6);
+	map = load_map_from_file(av[1]);
 	parsed_map = parce(map);
 	start(parsed_map);
 	cleanup_map(parsed_map);

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cub3D Raycasting Flowchart</title>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            font-size: 1em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .flowchart {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .description {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #ffd700;
+        }
+        .code-block {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Cub3D Raycasting Flowchart</h1>
+
+        <div class="description">
+            <h3>📋 Overview</h3>
+            <p>This interactive flowchart shows the complete raycasting process in your Cub3D project, from initialization to 3D rendering.</p>
+            <p><strong>What is Raycasting?</strong> Raycasting is a technique for simulating 3D vision by casting imaginary lines from the player's position to find walls and render them on screen.</p>
+        </div>
+
+        <div class="description">
+            <h3>🎯 Key Concepts</h3>
+            <div class="code-block">
+<strong>🏗️ Main Process Flow:</strong>
+
+1️⃣ <strong>Initialization</strong>
+   ├── Read map file (.cub file)
+   ├── Convert data to 2D array
+   ├── Find initial player position
+   └── Load wall textures
+
+2️⃣ <strong>Game Loop</strong>
+   ├── Check user input
+   ├── Update player position
+   ├── Render 3D scene
+   └── Display result on screen
+
+3️⃣ <strong>Raycasting</strong>
+   ├── Cast ray from player for each screen column
+   ├── Find first wall that ray hits
+   ├── Calculate distance from player to wall
+   └── Use distance to calculate wall height
+
+4️⃣ <strong>Rendering</strong>
+   ├── Draw ceiling
+   ├── Draw textured wall
+   ├── Draw floor
+   └── Draw minimap
+            </div>
+        </div>
+
+        <h2>🚀 Main Program Flow</h2>
+        <div class="flowchart">
+            <div class="mermaid">
+                flowchart TD
+                    A[🎯 Start Program] --> B[📊 Parse Map File]
+                    B --> C[🏗️ Initialize Game Data]
+                    C --> D[🎮 Start MLX Graphics]
+                    D --> E[⚡ Game Loop Running]
+                    E --> F[🎮 Check User Input]
+                    F --> G[👤 Move Player if Needed]
+                    G --> H[🖼️ Clear Previous Frame]
+                    H --> I[🌍 Draw 3D View]
+                    I --> J[🗺️ Draw Mini Map]
+                    J --> K[📺 Show Frame to User]
+                    K --> E
+
+                    style A fill:#ff6b6b,stroke:#fff,stroke-width:2px,color:#fff
+                    style D fill:#4ecdc4,stroke:#fff,stroke-width:2px,color:#000
+                    style I fill:#45b7d1,stroke:#fff,stroke-width:2px,color:#fff
+                    style J fill:#96ceb4,stroke:#fff,stroke-width:2px,color:#000
+            </div>
+        </div>
+
+        <h2>🏗️ Initialization Process</h2>
+        <div class="flowchart">
+            <div class="mermaid">
+                flowchart TD
+                    A[🎯 Initialize Game Data] --> B[📊 Extract Map Array]
+                    B --> C[📏 Calculate Map Size]
+                    C --> D[🖥️ Start Graphics System]
+                    D --> E[🪟 Create Game Window]
+                    E --> F[🎨 Create Image Buffer]
+                    F --> G[🧙‍♂️ Find Player Position]
+                    G --> H[🎮 Setup Key Controls]
+                    H --> I[🖼️ Load Wall Textures]
+                    I --> J[🔄 Start Game Loop]
+
+                    B1[📋 Check if Map Line]
+                    B2[📦 Fill Map Data]
+                    B --> B1
+                    B --> B2
+
+                    G1[🔍 Find N/S/E/W Character]
+                    G2[📍 Set Center Position]
+                    G3[🧭 Set Looking Direction]
+                    G --> G1
+                    G1 --> G2
+                    G2 --> G3
+
+                    I1[🌆 Load 4 Texture Files]
+                    I2[📊 Get Image Memory]
+                    I --> I1
+                    I1 --> I2
+
+                    style A fill:#ff6b6b,stroke:#fff,stroke-width:2px,color:#fff
+                    style G fill:#feca57,stroke:#fff,stroke-width:2px,color:#000
+                    style I fill:#48dbfb,stroke:#fff,stroke-width:2px,color:#000
+            </div>
+        </div>
+
+        <h2>⚡ Core Raycasting Algorithm</h2>
+        <div class="flowchart">
+            <div class="mermaid">
+                flowchart TD
+                    A[⚡ Find Wall Distance] --> B[📊 Find Horizontal Lines]
+                    B --> C[📊 Find Vertical Lines]
+                    C --> D[🔄 Step Through Grid Horizontally]
+                    D --> E{Hit Wall Horizontally?}
+                    E -->|No| F[➡️ Move to Next Step]
+                    F --> D
+                    E -->|Yes| G[📏 Calculate Distance]
+
+                    C --> H[🔄 Step Through Grid Vertically]
+                    H --> I{Hit Wall Vertically?}
+                    I -->|No| J[➡️ Move to Next Step]
+                    J --> H
+                    I -->|Yes| K[📏 Calculate Distance]
+
+                    G --> L{Which Distance is Closer?}
+                    K --> L
+                    L -->|Horizontal| M[✅ Use Horizontal Hit]
+                    L -->|Vertical| N[✅ Use Vertical Hit]
+                    M --> O[📊 Save Hit Information]
+                    N --> O
+
+                    O --> P[🎯 Save Hit Coordinates]
+                    O --> Q[📏 Save Final Distance]
+                    O --> R[🔍 Save Wall Type]
+
+                    style A fill:#ff6b6b,stroke:#fff,stroke-width:2px,color:#fff
+                    style E fill:#feca57,stroke:#fff,stroke-width:2px,color:#000
+                    style I fill:#feca57,stroke:#fff,stroke-width:2px,color:#000
+                    style L fill:#48dbfb,stroke:#fff,stroke-width:2px,color:#000
+            </div>
+        </div>
+
+        <h2>🌍 3D Scene Rendering</h2>
+        <div class="flowchart">
+            <div class="mermaid">
+                flowchart TD
+                    A[🌍 Draw 3D Scene] --> B[🔢 Calculate Ray Step]
+                    B --> C[🧭 Set Starting Angle]
+                    C --> D[🔄 For Each Screen Column]
+                    D --> E[⚡ Cast Ray to Find Wall]
+                    E --> F[🎯 Get Wall Hit Info]
+                    F --> G[📐 Fix Fish-Eye Effect]
+                    G --> H[🎨 Choose Wall Texture]
+                    H --> I[🖼️ Draw Wall Column]
+                    I --> J{More Columns?}
+                    J -->|Yes| K[➡️ Next Column]
+                    K --> D
+                    J -->|No| L[✅ 3D Scene Complete]
+
+                    H1{Vertical Wall?}
+                    H2[🖼️ East or West Texture]
+                    H3[🖼️ North or South Texture]
+                    H --> H1
+                    H1 -->|Yes| H2
+                    H1 -->|No| H3
+
+                    style A fill:#45b7d1,stroke:#fff,stroke-width:2px,color:#fff
+                    style E fill:#ff6b6b,stroke:#fff,stroke-width:2px,color:#fff
+                    style I fill:#96ceb4,stroke:#fff,stroke-width:2px,color:#000
+            </div>
+        </div>
+
+        <h2>🖼️ Wall Rendering Process</h2>
+        <div class="flowchart">
+            <div class="mermaid">
+                flowchart TD
+                    A[🖼️ Draw Wall Column] --> B[📏 Calculate Wall Height]
+                    B --> C[📍 Find Drawing Limits]
+                    C --> D[🎨 Draw Ceiling Area]
+                    D --> E[🎯 Find Texture Position]
+                    E --> F[📊 Calculate Texture Step]
+                    F --> G[🔄 For Each Wall Pixel]
+                    G --> H[🎨 Get Texture Color]
+                    H --> I[🖌️ Draw Pixel to Screen]
+                    I --> J{More Wall Pixels?}
+                    J -->|Yes| L[⬇️ Move to Next Pixel]
+                    L --> G
+                    J -->|No| M[🎨 Draw Floor Area]
+                    M --> N[✅ Column Finished]
+
+                    E1{Vertical Wall?}
+                    E2[🎯 Use Y-Coordinate]
+                    E3[🎯 Use X-Coordinate]
+                    E --> E1
+                    E1 -->|Yes| E2
+                    E1 -->|No| E3
+
+                    style A fill:#96ceb4,stroke:#fff,stroke-width:2px,color:#000
+                    style H fill:#48dbfb,stroke:#fff,stroke-width:2px,color:#000
+                    style I fill:#feca57,stroke:#fff,stroke-width:2px,color:#000
+            </div>
+        </div>
+
+        <h2>🎮 Input Handling System</h2>
+        <div class="flowchart">
+            <div class="mermaid">
+                flowchart TD
+                    A[🎮 Check Movement Input] --> B{W Key Pressed?}
+                    B -->|Yes| C[➡️ Move Forward]
+                    A --> D{S Key Pressed?}
+                    D -->|Yes| E[⬅️ Move Backward]
+                    A --> F{A Key Pressed?}
+                    F -->|Yes| G[⬅️ Strafe Left]
+                    A --> H{D Key Pressed?}
+                    H -->|Yes| I[➡️ Strafe Right]
+
+                    J[🔄 Check Rotation Input] --> K{Left Arrow?}
+                    K -->|Yes| L[↺ Turn Left]
+                    J --> M{Right Arrow?}
+                    M -->|Yes| N[↻ Turn Right]
+                    J --> O{Mouse Moved?}
+                    O -->|Yes| P[🖱️ Look Around]
+
+                    C1[🧮 Calculate New X Position]
+                    C2[🧮 Calculate New Y Position]
+                    C3{Wall at New X?}
+                    C4{Wall at New Y?}
+                    C5[✅ Update X if Safe]
+                    C6[✅ Update Y if Safe]
+
+                    C --> C1
+                    C1 --> C2
+                    C2 --> C3
+                    C2 --> C4
+                    C3 -->|No| C5
+                    C4 -->|No| C6
+
+                    style A fill:#feca57,stroke:#fff,stroke-width:2px,color:#000
+                    style J fill:#ff9ff3,stroke:#fff,stroke-width:2px,color:#000
+            </div>
+        </div>
+
+        <h2>🗺️ Minimap Rendering</h2>
+        <div class="flowchart">
+            <div class="mermaid">
+                flowchart TD
+                    A[🗺️ Draw Minimap] --> B[🔄 For Each Map Tile]
+                    B --> C[📊 Calculate Screen Position]
+                    C --> D[📍 Relative to Player]
+                    D --> E{Tile Visible on Minimap?}
+                    E -->|No| F[⏭️ Skip This Tile]
+                    E -->|Yes| G{Is Wall Tile?}
+                    G -->|Yes| H[🧱 Draw Dark Square]
+                    G -->|No| I[⬜ Draw Light Square]
+                    H --> J{More Tiles?}
+                    I --> J
+                    J -->|Yes| K[➡️ Next Tile]
+                    K --> B
+                    J -->|No| L[👤 Draw Player Dot]
+                    L --> M[✅ Minimap Complete]
+
+                    style A fill:#96ceb4,stroke:#fff,stroke-width:2px,color:#000
+                    style G fill:#feca57,stroke:#fff,stroke-width:2px,color:#000
+                    style L fill:#ff6b6b,stroke:#fff,stroke-width:2px,color:#fff
+            </div>
+        </div>
+
+        <h2>📋 MLX and Math Library Functions Reference</h2>
+
+        <div class="description">
+            <h3>🖥️ MLX Graphics Library Functions</h3>
+            <div class="code-block">
+<strong>mlx_init()</strong>
+├── Purpose: Initialize the MLX graphics system
+├── Parameters: None
+├── Returns: void* - pointer to MLX instance
+├── What it does: Sets up the connection to the X11 display server
+├── Used in: Initialization phase to start graphics
+└── Example: mlx_ptr = mlx_init();
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>mlx_new_window(void *mlx_ptr, int width, int height, char *title)</strong>
+├── Purpose: Create a new window for rendering
+├── Parameters:
+│   • MLX pointer - the MLX instance
+│   • window width - width in pixels
+│   • window height - height in pixels
+│   • window title - string for title bar
+├── Returns: void* - pointer to window instance
+├── What it does: Creates a window with specified dimensions and title
+├── Used in: Create the main game window (1200x800)
+└── Example: win_ptr = mlx_new_window(mlx_ptr, 1200, 800, "Cub3D");
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+<strong>mlx_new_image(void *mlx_ptr, int width, int height)</strong>
+├── Purpose: Create an image buffer for drawing
+├── Parameters:
+│   • MLX pointer - the MLX instance
+│   • image width - width in pixels
+│   • image height - height in pixels
+├── Returns: void* - pointer to image instance
+├── What it does: Allocates memory for an image buffer
+├── Used in: Create framebuffer for rendering before display
+└── Example: img = mlx_new_image(mlx_ptr, 1200, 800);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>mlx_get_data_addr(void *img_ptr, int *bpp, int *line_len, int *endian)</strong>
+├── Purpose: Get direct access to image pixel data
+├── Parameters:
+│   • Image pointer - the image to access
+│   • bits per pixel - pointer to store BPP value
+│   • line length - pointer to store line length
+│   • endianness - pointer to store endian info
+├── Returns: char* - pointer to raw image data
+├── What it does: Provides direct memory access for fast pixel manipulation
+├── Used in: Get image buffer address for my_mlx_pixel_put()
+└── Example: img_addr = mlx_get_data_addr(img, &bpp, &line_len, &endian);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr, int x, int y)</strong>
+├── Purpose: Display the image buffer on the window
+├── Parameters:
+│   • MLX pointer - the MLX instance
+│   • window pointer - target window
+│   • image pointer - image to display
+│   • x position - horizontal offset
+│   • y position - vertical offset
+├── Returns: int - success status
+├── What it does: Copies the image buffer to the window for display
+├── Used in: Display the rendered frame to the user
+└── Example: mlx_put_image_to_window(mlx_ptr, win_ptr, img, 0, 0);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>mlx_hook(void *win_ptr, int event, int mask, int (*f)(), void *param)</strong>
+├── Purpose: Register event handlers for window events
+├── Parameters:
+│   • Window pointer - target window
+│   • event type - type of event (2=KeyPress, 3=KeyRelease, etc.)
+│   • event mask - event mask flags
+│   • callback function - function to call on event
+│   • parameter - data to pass to callback
+├── Returns: int - success status
+├── What it does: Sets up callbacks for keyboard, mouse, and window events
+├── Used in: Setup input handling (key press/release, mouse move, window close)
+└── Example: mlx_hook(win_ptr, 2, 1L<<0, key_press, data);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>mlx_loop_hook(void *mlx_ptr, int (*f)(), void *param)</strong>
+├── Purpose: Register a function to be called continuously
+├── Parameters:
+│   • MLX pointer - the MLX instance
+│   • callback function - function to call every frame
+│   • parameter - data to pass to callback
+├── Returns: int - success status
+├── What it does: Sets up the main game loop function
+├── Used in: Register update_loop() to run every frame
+└── Example: mlx_loop_hook(mlx_ptr, update_loop, data);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>mlx_loop(void *mlx_ptr)</strong>
+├── Purpose: Start the main event loop
+├── Parameters:
+│   • MLX pointer - the MLX instance
+├── Returns: int - exit status
+├── What it does: Begins the main program loop, handling events and rendering
+├── Used in: Start the game and keep it running
+└── Example: mlx_loop(mlx_ptr);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>mlx_xpm_file_to_image(void *mlx_ptr, char *filename, int *width, int *height)</strong>
+├── Purpose: Load XPM texture files
+├── Parameters:
+│   • MLX pointer - the MLX instance
+│   • filename - path to XPM file
+│   • width pointer - stores loaded image width
+│   • height pointer - stores loaded image height
+├── Returns: void* - pointer to loaded image
+├── What it does: Loads texture images from XPM files
+├── Used in: Load wall textures (North, South, East, West)
+└── Example: tex_img = mlx_xpm_file_to_image(mlx_ptr, "texture.xpm", &w, &h);
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════════ -->
+
+        <div class="description">
+            <h3>📐 Math Library Functions</h3>
+            <div class="code-block">
+<strong>cos(double angle)</strong>
+├── Purpose: Calculate cosine of an angle
+├── Parameters: angle in radians
+├── Returns: double - cosine value (-1.0 to 1.0)
+├── What it does: Returns the cosine of the given angle
+├── Used in: Calculate X component of movement and raycasting
+├── Header: #include &lt;math.h&gt;
+└── Example: new_x = player_x + cos(player_angle) * speed;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>sin(double angle)</strong>
+├── Purpose: Calculate sine of an angle
+├── Parameters: angle in radians
+├── Returns: double - sine value (-1.0 to 1.0)
+├── What it does: Returns the sine of the given angle
+├── Used in: Calculate Y component of movement and raycasting
+├── Header: #include &lt;math.h&gt;
+└── Example: new_y = player_y + sin(player_angle) * speed;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>tan(double angle)</strong>
+├── Purpose: Calculate tangent of an angle
+├── Parameters: angle in radians
+├── Returns: double - tangent value
+├── What it does: Returns the tangent of the given angle (sin/cos)
+├── Used in: Calculate ray intersections with grid lines
+├── Header: #include &lt;math.h&gt;
+└── Example: x = player_x + (y - player_y) / tan(ray_angle);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>fmod(double x, double y)</strong>
+├── Purpose: Calculate floating-point remainder
+├── Parameters: dividend (x), divisor (y)
+├── Returns: double - remainder of x/y
+├── What it does: Returns the floating-point remainder of division
+├── Used in: Calculate texture coordinates, wrap values within texture bounds
+├── Header: #include &lt;math.h&gt;
+└── Example: tex_x = fmod(hit_x, TILE_SIZE) * tex_width / TILE_SIZE;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>hypot(double x, double y)</strong>
+├── Purpose: Calculate hypotenuse (Euclidean distance)
+├── Parameters: x coordinate difference, y coordinate difference
+├── Returns: double - distance = sqrt(x² + y²)
+├── What it does: Calculates the distance between two points
+├── Used in: Calculate distance from player to wall hit point
+├── Header: #include &lt;math.h&gt;
+└── Example: distance = hypot(hit_x - player_x, hit_y - player_y);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>atan2(double y, double x)</strong>
+├── Purpose: Calculate angle from origin to point (x,y)
+├── Parameters: y coordinate, x coordinate
+├── Returns: double - angle in radians (-π to π)
+├── What it does: Returns the angle of a vector pointing to (x,y)
+├── Used in: Calculate angles for raycasting and player orientation
+├── Header: #include &lt;math.h&gt;
+└── Example: angle = atan2(target_y - player_y, target_x - player_x);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>sqrt(double x)</strong>
+├── Purpose: Calculate square root
+├── Parameters: number to find square root of
+├── Returns: double - square root value
+├── What it does: Returns the square root of the given number
+├── Used in: Distance calculations (though hypot() is preferred)
+├── Header: #include &lt;math.h&gt;
+└── Example: distance = sqrt(dx * dx + dy * dy);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>floor(double x)</strong>
+├── Purpose: Round down to nearest integer
+├── Parameters: floating-point number
+├── Returns: double - largest integer ≤ x
+├── What it does: Rounds down to the nearest whole number
+├── Used in: Convert world coordinates to map grid coordinates
+├── Header: #include &lt;math.h&gt;
+└── Example: map_x = (int)floor(world_x / TILE_SIZE);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>ceil(double x)</strong>
+├── Purpose: Round up to nearest integer
+├── Parameters: floating-point number
+├── Returns: double - smallest integer ≥ x
+├── What it does: Rounds up to the nearest whole number
+├── Used in: Calculate drawing bounds and texture sampling
+├── Header: #include &lt;math.h&gt;
+└── Example: end_pixel = (int)ceil(wall_end);
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════════ -->
+
+        <div class="description">
+            <h3>🔧 Additional Utility Functions</h3>
+            <div class="code-block">
+<strong>abs(int x)</strong>
+├── Purpose: Calculate absolute value of integer
+├── Parameters:
+│   • x - integer value
+├── Returns: int - absolute value (always positive)
+├── What it does: Returns the positive version of a number
+├── Used in: Distance calculations and coordinate differences
+├── Header: #include &lt;stdlib.h&gt;
+└── Example: distance = abs(x2 - x1) + abs(y2 - y1);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>malloc(size_t size)</strong>
+├── Purpose: Allocate dynamic memory
+├── Parameters:
+│   • size - number of bytes to allocate
+├── Returns: void* - pointer to allocated memory (or NULL if failed)
+├── What it does: Reserves a block of memory on the heap
+├── Used in: Allocate memory for map arrays and data structures
+├── Header: #include &lt;stdlib.h&gt;
+└── Example: map = malloc(rows * sizeof(char*));
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>free(void *ptr)</strong>
+├── Purpose: Free previously allocated memory
+├── Parameters:
+│   • ptr - pointer to memory to free
+├── Returns: void
+├── What it does: Releases memory back to the system
+├── Used in: Clean up allocated memory when exiting
+├── Header: #include &lt;stdlib.h&gt;
+└── Example: free(map[i]);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<strong>memset(void *ptr, int value, size_t num)</strong>
+├── Purpose: Set memory to a specific value
+├── Parameters:
+│   • ptr - memory pointer
+│   • value - value to set
+│   • num - number of bytes
+├── Returns: void* - pointer to the memory area
+├── What it does: Fills memory with a specific byte value
+├── Used in: Clear image buffer (set all pixels to 0)
+├── Header: #include &lt;string.h&gt;
+└── Example: memset(img_data, 0, width * height * 4);
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════════ -->
+
+        <div class="description">
+            <h3>⚙️ Key Constants & Mathematical Details</h3>
+            <div class="code-block">
+<strong>🔢 Important Constants:</strong>
+TS = 64                → Tile Size (pixels per map cell)
+FOV = 1.0              → Field of View (radians ≈ 57.3°)
+SCREEN_WIDTH = 1200    → Window Width (number of rays cast)
+SCREEN_HEIGHT = 800    → Window Height
+MOVE_SPEED = 2.0       → Movement Speed (pixels per frame)
+ROT_SPEED = 0.02       → Rotation Speed (radians per frame)
+
+<strong>📐 Mathematical Formulas Used:</strong>
+
+🎯 <strong>Ray Casting:</strong>
+├── Horizontal intercept: x = px + (y - py) / tan(angle)
+│   └── Calculates where ray intersects horizontal grid line
+├── Vertical intercept: y = py + (x - px) × tan(angle)
+│   └── Calculates where ray intersects vertical grid line
+├── Distance: hypot(hit_x - px, hit_y - py)
+│   └── Euclidean distance from player to hit point
+└── Fisheye correction: dist × cos(ray_angle - player_angle)
+    └── Prevents visual distortion at screen edges
+
+🖼️ <strong>3D Projection:</strong>
+├── Wall height: (TS × SCREEN_HEIGHT) / distance
+│   └── Farther walls appear shorter on screen
+├── Texture X: fmod(hit_coordinate, TS) × tex_width / TS
+│   └── Which part of texture to sample horizontally
+├── Texture step: tex_height / wall_height
+│   └── How much to advance in texture per screen pixel
+└── Texture Y: (int)tex_pos % tex_height
+    └── Vertical position in texture
+
+👤 <strong>Movement:</strong>
+├── Forward: new_x = x + cos(angle) × speed
+├── Forward: new_y = y + sin(angle) × speed
+│   └── Movement in direction player is facing
+├── Strafe: angle ± π/2 for left/right movement
+│   └── π/2 = 90 degrees, perpendicular to view direction
+└── Rotation: angle += delta × sensitivity
+    └── Change view direction based on mouse/key input
+
+🗺️ <strong>Minimap:</strong>
+├── Screen X: (world_x - player_x) / scale + center_x
+├── Screen Y: (world_y - player_y) / scale + center_y
+│   └── Convert world position to minimap position
+└── Scale factor: TILE_SIZE / SCALE_FACTOR (64/8 = 8)
+    └── Every 8 world pixels = 1 minimap pixel
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════════ -->
+
+        <div class="description">
+            <h3>🚀 Algorithm Complexity & Performance</h3>
+            <div class="code-block">
+<strong>⚡ Raycasting Performance:</strong>
+├── Time Complexity: O(n × m) where n = screen width, m = average ray length
+├── Space Complexity: O(1) - constant memory usage
+├── Rays per frame: 1200 (one per column)
+├── Average ray steps: ~10-20 grid intersections per ray
+└── Total operations: ~12,000-24,000 per frame
+
+<strong>🎨 Rendering Performance:</strong>
+├── Pixel operations per frame: 1200 × 800 = 960,000
+├── Texture samples: ~400,000 (wall pixels only)
+├── Memory writes: 960,000 pixels × 4 bytes = 3.84MB per frame
+└── Frame rate target: 60 FPS (16.67ms per frame)
+
+<strong>🔧 Optimization Techniques:</strong>
+├── DDA Algorithm: Efficient grid traversal
+├── Fisheye Correction: Prevents visual distortion
+├── Texture Caching: Preloaded XPM data
+├── Fast Pixel Writing: Direct memory access
+└── Collision Detection: Early termination on wall hit
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════════ -->
+
+        <div class="description">
+            <h3>📊 Data Structures & Their Usage</h3>
+            <div class="code-block">
+<strong>t_data - Main Game State:</strong>
+├── map: char** - 2D map array ('1' = wall, '0' = empty, 'N/S/E/W' = player spawn)
+├── player: t_player - Player position and angle
+├── mlx_ptr, win_ptr, img: MLX graphics pointers
+├── img_adr: char* - Direct access to image buffer for fast pixel writing
+├── tex[4]: t_tex - Array of 4 wall textures (North/South/East/West)
+├── floor, ceiling: t_color - RGB colors for floor and ceiling
+├── input: t_input - Current input state flags
+└── rows, cols: int - Map dimensions
+
+<strong>t_player - Player State:</strong>
+├── fpx, fpy: double - Precise floating-point position
+├── x, y: int - Integer position (rounded for collision)
+├── angle: double - Viewing direction in radians (0 = East, π/2 = South)
+└── Used in: movement, rotation, raycasting
+
+<strong>t_hit - Ray Hit Information:</strong>
+├── dist: double - Distance from player to wall
+├── hit_x, hit_y: double - Exact coordinates of wall intersection
+├── is_vertical: int - Flag: 1 = vertical wall, 0 = horizontal wall
+├── tex_id: int - Which texture to use (0=North, 1=South, 2=East, 3=West)
+├── ray_angle: double - Angle of the ray that hit the wall
+└── Used in: raycasting result, texture selection, 3D rendering
+
+<strong>t_input - Input State:</strong>
+├── k_up, k_down: int - W/S movement flags
+├── k_left, k_right: int - Arrow key rotation flags
+├── k_view_left, k_view_right: int - A/D strafe flags
+└── Updated by: key_press/key_release, used by: handle_movement/handle_rotation
+
+<strong>t_tex - Texture Data:</strong>
+├── img: void* - MLX image pointer
+├── addr: char* - Direct memory access to texture pixels
+├── width, height: int - Texture dimensions
+├── bpp, line_len: int - Bytes per pixel and line length
+└── Used in: texture sampling during wall rendering
+
+<strong>t_color - RGB Color:</strong>
+├── r, g, b: int - Red, green, blue values (0-255)
+├── Converted to hex: (r << 16) | (g << 8) | b
+└── Used for: floor, ceiling, minimap colors
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════════ -->
+
+        <div class="description">
+            <h3>🔄 Complete Execution Flow</h3>
+            <div class="code-block">
+<strong>📋 Step-by-Step Program Execution:</strong>
+
+1️⃣ <strong>Program Startup (main.c):</strong>
+   ├── Parse command line arguments
+   ├── Call parce() to read and validate .cub file
+   ├── Call start() with parsed map data
+   └── Exit and cleanup
+
+2️⃣ <strong>Engine Initialization (start.c):</strong>
+   ├── Call init_data_from_map()
+   ├── Start mlx_loop() - begins event handling
+   └── Program runs until exit
+
+3️⃣ <strong>Data Setup (1_init.c):</strong>
+   ├── extract_map_from_parsed_data() - convert file to 2D array
+   ├── count_map_dimensions() - get map size
+   ├── mlx_init() - initialize graphics library
+   ├── mlx_new_window() - create display window
+   ├── mlx_new_image() - create image buffer
+   ├── init_player_pos() - find spawn point and direction
+   ├── Setup input hooks (key_press, key_release, mouse_move, close_window)
+   ├── init_textures() - load wall textures
+   └── mlx_loop_hook(update_loop) - set main game loop
+
+4️⃣ <strong>Game Loop (5_update_player_pos.c):</strong>
+   ├── handle_movement() - process WASD input
+   ├── handle_rotation() - process arrow keys and mouse
+   ├── clear_img() - reset image buffer to black
+   ├── draw_3d() - render 3D scene
+   ├── draw_minimap() - render 2D overlay
+   ├── mlx_put_image_to_window() - display frame
+   └── Return to MLX (repeats ~60 times per second)
+
+5️⃣ <strong>Input Processing (4_input.c):</strong>
+   ├── key_press() sets input flags to 1
+   ├── key_release() sets input flags to 0
+   ├── mouse_move() updates player angle
+   └── close_window() triggers cleanup and exit
+
+6️⃣ <strong>Movement Processing (5_update_player_pos.c):</strong>
+   ├── Check each input flag (k_up, k_down, k_view_left, k_view_right)
+   ├── Calculate movement angle (forward/backward/strafe)
+   ├── Call move() with calculated angle
+   ├── move() calculates new position using trigonometry
+   ├── Check collision with is_wall() before updating position
+   └── Update player.fpx, player.fpy if movement is safe
+
+7️⃣ <strong>3D Rendering (7_draw_3d.c):</strong>
+   ├── Calculate ray step: FOV / SCREEN_WIDTH
+   ├── Start angle: player.angle - FOV/2
+   ├── For each screen column (x = 0 to 1199):
+   │   ├── Call get_distance() to cast ray
+   │   ├── Apply fisheye correction: dist *= cos(ray_angle - player_angle)
+   │   ├── Determine texture ID based on wall face
+   │   ├── Call draw_wall_3d() to render column
+   │   └── Increment angle for next column
+   └── All columns rendered
+
+8️⃣ <strong>Raycasting (6_get_distance.c):</strong>
+   ├── get_horizontal_intercept() - find first horizontal grid line
+   ├── get_vertical_intercept() - find first vertical grid line
+   ├── Step through horizontal grid using get_next_intercept()
+   ├── Step through vertical grid using get_next_intercept()
+   ├── Check is_wall() at each intersection
+   ├── Calculate distances using hypot()
+   ├── Return closest hit in t_hit struct
+   └── Hit data used for wall rendering
+
+9️⃣ <strong>Wall Rendering (7_draw_3d.c):</strong>
+   ├── Calculate wall height: (TS * SCREEN_HEIGHT) / distance
+   ├── Calculate draw bounds: start/end points on screen
+   ├── Draw ceiling pixels using rgb_to_hex(ceiling_color)
+   ├── Calculate texture coordinates
+   ├── For each wall pixel:
+   │   ├── Sample texture color at (tex_x, tex_y)
+   │   ├── Call my_mlx_pixel_put() to write to buffer
+   │   └── Increment texture position
+   ├── Draw floor pixels using rgb_to_hex(floor_color)
+   └── Column complete
+
+🔟 <strong>Minimap Rendering (2_draw_2D_map.c):</strong>
+   ├── For each map tile:
+   │   ├── Calculate screen position relative to player
+   │   ├── Check if tile is within minimap bounds
+   │   ├── Draw colored square (dark=wall, light=empty)
+   │   └── Continue to next tile
+   ├── draw_player() - red dot at minimap center
+   └── Minimap overlay complete
+
+📺 <strong>Frame Display:</strong>
+   ├── mlx_put_image_to_window() copies buffer to screen
+   ├── Frame displayed to user
+   ├── Return to game loop
+   └── Process continues at 60 FPS
+            </div>
+        </div>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#45b7d1',
+                primaryTextColor: '#000',
+                primaryBorderColor: '#fff',
+                lineColor: '#333',
+                secondaryColor: '#96ceb4',
+                tertiaryColor: '#feca57'
+            }
+        });
+    </script>
+</body>
+</html>
