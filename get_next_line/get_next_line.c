@@ -1,4 +1,16 @@
-#include"get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/24 15:45:13 by ykabili-          #+#    #+#             */
+/*   Updated: 2025/10/24 15:45:45 by ykabili-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
 
 char	*ft_joinfree(char *buffer, char *buff)
 {
@@ -88,8 +100,8 @@ char	*read_file(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char *buffer;
-	char *line;
+	static char	*buffer;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
