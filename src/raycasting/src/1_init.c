@@ -6,7 +6,7 @@
 /*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:29:41 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/22 12:11:19 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/24 19:05:49 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,22 @@ void	count_map_dimensions(char **map, int *rows, int *cols)
 	}
 }
 
-void	init_textures(t_data *d)
+void	init_textures(t_data *d, t_map *m)
 {
 	int	i;
 
 	i = 0;
 	d->tex[TEX_NORTH].img = mlx_xpm_file_to_image(d->mlx_ptr,
-			"textures/AnyConv.com__bluestone.xpm", &d->tex[TEX_NORTH].width,
+			m->no_player, &d->tex[TEX_NORTH].width,
 			&d->tex[TEX_NORTH].height);
 	d->tex[TEX_SOUTH].img = mlx_xpm_file_to_image(d->mlx_ptr,
-			"textures/AnyConv.com__colorstone.xpm", &d->tex[TEX_SOUTH].width,
+			m->so_player, &d->tex[TEX_SOUTH].width,
 			&d->tex[TEX_SOUTH].height);
 	d->tex[TEX_EAST].img = mlx_xpm_file_to_image(d->mlx_ptr,
-			"textures/AnyConv.com__eagle.xpm", &d->tex[TEX_EAST].width,
+			m->ea_player, &d->tex[TEX_EAST].width,
 			&d->tex[TEX_EAST].height);
 	d->tex[TEX_WEST].img = mlx_xpm_file_to_image(d->mlx_ptr,
-			"textures/AnyConv.com__greystone.xpm", &d->tex[TEX_WEST].width,
+			m->we_player, &d->tex[TEX_WEST].width,
 			&d->tex[TEX_WEST].height);
 	while (i < 4)
 	{
@@ -129,6 +129,6 @@ void	init_data_from_map(t_data *data, t_map *map_data)
 	mlx_hook(data->win_ptr, 17, 0, close_window, data);
 	mlx_hook(data->win_ptr, 6, 1L << 6, handle_mouse, data);
 	mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
-	init_textures(data);
+	init_textures(data, map_data);
 	mlx_loop_hook(data->mlx_ptr, update_loop, data);
 }
