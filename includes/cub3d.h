@@ -6,7 +6,7 @@
 /*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:42:03 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/24 15:37:46 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/24 17:26:43 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define M_PI 3.14159265358979323846
 # define TS 64
 # define PLAYER_R 6
-# define MOVE_SPEED 5.0
+# define MOVE_SPEED 2.0
 # define ROT_SPEED 0.02
 # define EPS 1e-6
 # define FOV 1.0000000000

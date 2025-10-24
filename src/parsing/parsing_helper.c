@@ -6,7 +6,7 @@
 /*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:12:30 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/13 19:14:34 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:09:27 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,23 @@ t_color	ft_nb_take(char *str, int i)
 
 	color.r = ft_atoi_skip(str, &i);
 	if (str[i] != ',')
-		print_error("Error: Missing comma in color\n", 1);
+		print_error("⚠️Error⚠️\n", 1);
 	i++;
 	color.g = ft_atoi_skip(str, &i);
 	if (str[i] != ',')
-		print_error("Error: Missing comma in color\n", 1);
+		print_error("⚠️Error⚠️\n", 1);
 	i++;
 	color.b = ft_atoi_skip(str, &i);
 	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')
-			print_error("Error: Invalid characters after color\n", 1);
+			print_error("⚠️Error⚠️\n", 1);
 		i++;
 	}
 	if (color.r < 0 || color.r > 255
 		|| color.g < 0 || color.g > 255
 		|| color.b < 0 || color.b > 255)
-		print_error("Error: RGB value out of range (0-255)\n", 1);
+		print_error("⚠️Error⚠️\n", 1);
 	return (color);
 }
 
@@ -45,7 +45,7 @@ void	get_path_bounds(char *line, int i, int *start, int *end)
 	while (line[i] && (line[i] == ' ' || (line[i] >= 9 && line[i] <= 13)))
 		i++;
 	if (!line[i])
-		print_error("Error: Missing path after identifier\n", 1);
+		print_error("⚠️Error⚠️\n", 1);
 	*start = i;
 	last = *start;
 	while (line[last] && line[last] != '\n')
@@ -58,7 +58,7 @@ void	get_path_bounds(char *line, int i, int *start, int *end)
 	while (i < *end)
 	{
 		if (line[i] == ' ' || (line[i] >= 9 && line[i] <= 13))
-			print_error("Error: Space inside path\n", 1);
+			print_error("⚠️Error⚠️\n", 1);
 		i++;
 	}
 }
@@ -69,6 +69,8 @@ char	*ft_str_take(char *line, int i)
 	int	end;
 
 	get_path_bounds(line, i, &start, &end);
+	if (access(ft_substr(line, start, end - start), F_OK) != 0)
+		print_error("⚠️Error⚠️\n", 1);
 	return (ft_substr(line, start, end - start));
 }
 
