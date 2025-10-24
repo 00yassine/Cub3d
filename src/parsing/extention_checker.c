@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_helper2.c                                  :+:      :+:    :+:   */
+/*   extention_checker.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 19:13:28 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/24 18:08:03 by ykabili-         ###   ########.fr       */
+/*   Created: 2025/10/24 15:35:49 by ykabili-          #+#    #+#             */
+/*   Updated: 2025/10/24 18:05:38 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	ft_atoi_skip(char *str, int *i)
+static int	check_map_name(char *str)
 {
-	int	nb;
+	int (i) = 0;
+	while (str[i])
+		i++;
+	if (str[i - 1] == 'b' && str[i - 2] == 'u'
+		&& str[i - 3] == 'c' && str[i - 4] == '.')
+		return (1);
+	return (0);
+}
 
-	nb = 0;
-	skip_spaces(str, i);
-	if (!(str[*i] >= '0' && str[*i] <= '9'))
-		print_error("⚠️Error⚠️\n", 1);
-	while (str[*i] >= '0' && str[*i] <= '9')
+void	ft_ex_checker(char *str)
+{
+	if (!check_map_name(str))
 	{
-		if (nb * 10 + (str[*i] - 48) > 255 || nb * 10 + (str[*i] - 48) < 0)
-			return (-1);
-		nb = nb * 10 + (str[*i] - 48);
-		(*i)++;
+		printf("⚠️Error⚠️\n");
+		exit(1);
 	}
-	skip_spaces(str, i);
-	return (nb);
 }

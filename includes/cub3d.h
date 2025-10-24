@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:42:03 by elkharti          #+#    #+#             */
 /*   Updated: 2025/10/24 18:50:04 by elkharti         ###   ########.fr       */
@@ -26,7 +26,7 @@
 # define M_PI 3.14159265358979323846
 # define TS 64
 # define PLAYER_R 6
-# define MOVE_SPEED 5.0
+# define MOVE_SPEED 2.0
 # define ROT_SPEED 0.02
 # define EPS 1e-6
 # define FOV 1.0000000000
@@ -186,9 +186,9 @@ void			count_map_dimensions(char **map, int *rows, int *cols);
 int				key_press(int key, void *p);
 int				key_release(int key, void *p);
 int				close_window(void *p);
-int 			handle_mouse(int x, int y, void *param);
+int				handle_mouse(int x, int y, void *param);
 	/*	drawing	*/
-	void init_player_pos(t_data *data);
+void			init_player_pos(t_data *data);
 void			draw_3d(t_data *d, int x);
 void			draw_minimap(t_data *d);
 unsigned int	rgb_to_hex(t_color *c);
@@ -213,6 +213,7 @@ t_color			ft_nb_take(char *str, int i);
 int				ft_atoi_skip(char *str, int *i);
 char			*ft_str_take(char *line, int i);
 void			skip_spaces(char *str, int *i);
+void			ft_ex_checker(char *str);
 
 /*	utils	*/
 void			print_error(char *error, int exitcode);

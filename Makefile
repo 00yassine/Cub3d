@@ -28,7 +28,8 @@ SRC = main.c \
 	src/raycasting/src/7_1_draw_helpers.c \
 	src/raycasting/src/9_utils.c \
 	src/cleanup.c \
-	src/raycasting/src/2.1_draw_2D_map.c
+	src/raycasting/src/2.1_draw_2D_map.c \
+	src/parsing/extention_checker.c
 
 all: $(LIBFT) mlx $(NAME)
 
