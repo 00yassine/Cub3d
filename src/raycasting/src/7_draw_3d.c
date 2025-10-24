@@ -6,7 +6,7 @@
 /*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:29:42 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/22 12:06:00 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/24 19:25:07 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ static void	set_texture_id(t_hit *hit, double cur_angle)
 	if (hit->is_vertical)
 	{
 		if (cos(cur_angle) > 0)
-			hit->tex_id = 3;
+			hit->tex_id = TEX_WEST;
 		else
-			hit->tex_id = 2;
+			hit->tex_id = TEX_EAST;
 	}
 	else
 	{
 		if (sin(cur_angle) > 0)
-			hit->tex_id = 0;
+			hit->tex_id = TEX_NORTH;
 		else
-			hit->tex_id = 1;
+			hit->tex_id = TEX_SOUTH;
 	}
 }
 

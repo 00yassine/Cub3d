@@ -1,7 +1,7 @@
-SO  ../textures/Syasine.xpm
-NO ../textures/Nyassine.xpm
-WE ../textures/Wyassine.xpm
-EA ../textures/Wyassine.xpm
+SO textures/AnyConv.com__bluestone.xpm
+NO textures/AnyConv.com__colorstone.xpm
+WE textures/AnyConv.com__purplestone.xpm
+EA textures/AnyConv.com__greystone.xpm
 
 F 230,200,130
 C 240,26,70
@@ -9,7 +9,7 @@ C 240,26,70
 
 11111111111111111111111111111111      11111111
 1S000000000000000000000000000111      11111111
-100111100011110001111000111101     1111111111
+1001111000111100011110001111011     1111111111
 100100100010010001001000100101
 100111100011110001111000111101
 100000000000100000000000000001
