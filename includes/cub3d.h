@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:42:03 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/24 18:50:04 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/25 08:52:53 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,15 +174,10 @@ typedef struct s_map
 	t_ele_flags	ele;
 }	t_map;
 
-/*	runtime	*/
 int				start(t_map *map_data);
 int				update_loop(void *p);
-
-/*	init	*/
 void			init_data_from_map(t_data *data, t_map *map_data);
 void			count_map_dimensions(char **map, int *rows, int *cols);
-
-/*	input	*/
 int				key_press(int key, void *p);
 int				key_release(int key, void *p);
 int				close_window(void *p);
@@ -216,7 +211,7 @@ void			skip_spaces(char *str, int *i);
 void			ft_ex_checker(char *str);
 
 /*	utils	*/
-void			print_error(char *error, int exitcode);
+void			print_error(char *error);
 void			set_vertical_hit(t_hit *hit, t_point x_int, double x_dist);
 
 /*	cleanup	*/

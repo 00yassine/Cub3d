@@ -6,7 +6,7 @@
 /*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 09:20:00 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/24 11:18:33 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/25 09:16:04 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	my_mlx_pixel_put(t_data *d, int x, int y, int color)
 void	init_wall_params(t_data *d, t_hit *hit, t_wall *w)
 {
 	w->line_height = (int)((TS * SCREEN_HEIGHT) / hit->dist);
-	w->draw_start = -w->line_height / 2 + SCREEN_HEIGHT / 2;
+	w->draw_start = (SCREEN_HEIGHT / 2) - (w->line_height / 2);
 	if (w->draw_start < 0)
 		w->draw_start = 0;
-	w->draw_end = w->line_height / 2 + SCREEN_HEIGHT / 2;
+	w->draw_end = (SCREEN_HEIGHT / 2) + (w->line_height / 2);
 	if (w->draw_end >= SCREEN_HEIGHT)
 		w->draw_end = SCREEN_HEIGHT - 1;
 	w->tex = &d->tex[hit->tex_id];
