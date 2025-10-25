@@ -6,7 +6,7 @@
 /*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:24:27 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/22 12:14:01 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/25 09:00:59 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,17 @@ int	close_window(void *p)
 
 int	handle_mouse(int x, int y, void *param)
 {
-	t_data		*data;
-	static int	prev_x = SCREEN_WIDTH / 2;
+	t_data		*d;
+	static int	last_x = -1;
 	int			delta_x;
 
 	(void)y;
-	data = (t_data *)param;
-	delta_x = x - prev_x;
-	if (delta_x > 0)
-		data->player.angle += ROT_SPEED * 2;
-	else if (delta_x < 0)
-		data->player.angle -= ROT_SPEED * 2;
-	if (data->player.angle < 0)
-		data->player.angle += 2 * M_PI;
-	if (data->player.angle >= 2 * M_PI)
-		data->player.angle -= 2 * M_PI;
-	prev_x = x;
+	d = (t_data *)param;
+	if (last_x == -1)
+		last_x = x;
+	delta_x = x - last_x;
+	d->player.angle += delta_x * 0.002;
+	last_x = SCREEN_WIDTH / 2;
+	mlx_mouse_move(d->mlx_ptr, d->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_helper2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:13:28 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/24 18:08:03 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/25 08:54:02 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_atoi_skip(char *str, int *i)
 	nb = 0;
 	skip_spaces(str, i);
 	if (!(str[*i] >= '0' && str[*i] <= '9'))
-		print_error("⚠️Error⚠️\n", 1);
+		print_error("⚠️Error⚠️\n");
 	while (str[*i] >= '0' && str[*i] <= '9')
 	{
 		if (nb * 10 + (str[*i] - 48) > 255 || nb * 10 + (str[*i] - 48) < 0)
