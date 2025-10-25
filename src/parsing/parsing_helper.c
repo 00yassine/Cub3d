@@ -6,7 +6,7 @@
 /*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:12:30 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/25 08:54:26 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/25 10:09:40 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ t_color	ft_nb_take(char *str, int i)
 			print_error("⚠️Error⚠️\n");
 		i++;
 	}
-	if (color.r < 0 || color.r > 255
-		|| color.g < 0 || color.g > 255
-		|| color.b < 0 || color.b > 255)
+	if (color.r < 0 || color.r > 255 || color.g < 0
+		|| color.g > 255 || color.b < 0 || color.b > 255)
 		print_error("⚠️Error⚠️\n");
 	return (color);
 }
@@ -65,13 +64,18 @@ void	get_path_bounds(char *line, int i, int *start, int *end)
 
 char	*ft_str_take(char *line, int i)
 {
-	int	start;
-	int	end;
+	int		start;
+	int		end;
+	char	*path;
 
 	get_path_bounds(line, i, &start, &end);
-	if (access(ft_substr(line, start, end - start), F_OK) != 0)
+	path = ft_substr(line, start, end - start);
+	if (access(path, F_OK) != 0)
+	{
+		free(path);
 		print_error("⚠️Error⚠️\n");
-	return (ft_substr(line, start, end - start));
+	}
+	return (path);
 }
 
 void	skip_spaces(char *str, int *i)
