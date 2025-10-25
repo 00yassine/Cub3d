@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 12:01:52 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/22 12:03:34 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:26:34 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	cleanup_map(t_map *map)
 {
 	if (!map)
 		return ;
-	if (map->all_content)
-		free_2d_array(map->all_content);
 	if (map->no_player)
 		free(map->no_player);
 	if (map->so_player)
