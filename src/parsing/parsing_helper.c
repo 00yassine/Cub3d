@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:12:30 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/28 19:45:17 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:49:55 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+# include "../../includes/cub3d.h"
 
 t_color ft_nb_take(char *str, int i)
 {
