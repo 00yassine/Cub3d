@@ -1,7 +1,7 @@
-SO textures/AnyConv.com__bluestone.xpm
-NO textures/AnyConv.com__colorstone.xpm
-WE textures/AnyConv.com__purplestone.xpm
-EA textures/AnyConv.com__greystone.xpm
+SO textures/AnyConv.com__redbrick.xpm
+NO textures/AnyConv.com__eagle.xpm
+WE textures/AnyConv.com__greystone.xpm
+EA textures/AnyConv.com__wood.xpm
 
 F 230,200,130
 C 240,26,70

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:42:03 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/24 17:26:43 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/29 08:53:27 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,28 @@ typedef struct s_point
 
 typedef struct s_player
 {
-	double	angle;
-	int		x;
-	int		y;
-	double	fpx;
-	double	fpy;
+	double		angle;
+	int			x;
+	int			y;
+	double		fpx;
+	double		fpy;
 }	t_player;
 
 typedef struct s_input
 {
-	int	k_up;
-	int	k_down;
-	int	k_left;
-	int	k_right;
-	int	k_view_left;
-	int	k_view_right;
+	int		k_up;
+	int		k_down;
+	int		k_left;
+	int		k_right;
+	int		k_view_left;
+	int		k_view_right;
 }	t_input;
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
+	int		r;
+	int		g;
+	int		b;
 }	t_color;
 
 typedef struct s_tex
@@ -86,31 +86,31 @@ typedef struct s_tex
 
 typedef struct s_draw_minimap
 {
-	int		x;
-	int		y;
-	int		color;
-	double	player_x;
-	double	player_y;
-	double	map_x;
-	double	map_y;
-	double	tile_x;
-	double	tile_y;
-	double	cell;
+	int				x;
+	int				y;
+	int				color;
+	double			player_x;
+	double			player_y;
+	double			map_x;
+	double			map_y;
+	double			tile_x;
+	double			tile_y;
+	double			cell;
 }	t_draw_minimap;
 
 typedef struct s_draw_dir
 {
-	double	dir_len;
-	double	start_x;
-	double	start_y;
-	double	end_x;
-	double	end_y;
-	double	dx;
-	double	dy;
-	double	steps;
-	double	x_inc;
-	double	y_inc;
-	int		i;
+	double		dir_len;
+	double		start_x;
+	double		start_y;
+	double		end_x;
+	double		end_y;
+	double		dx;
+	double		dy;
+	double		steps;
+	double		x_inc;
+	double		y_inc;
+	int			i;
 }	t_draw_dir;
 
 typedef struct s_data
@@ -135,22 +135,22 @@ typedef struct s_data
 
 typedef struct s_ele_flags
 {
-	int	no;
-	int	so;
-	int	we;
-	int	ea;
-	int	f;
-	int	c;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		f;
+	int		c;
 }	t_ele_flags;
 
 typedef struct s_hit
 {
-	double	dist;
-	double	hit_x;
-	double	hit_y;
-	int		is_vertical;
-	int		tex_id;
-	double	ray_angle;
+	double			dist;
+	double			hit_x;
+	double			hit_y;
+	int				is_vertical;
+	int				tex_id;
+	double			ray_angle;
 }	t_hit;
 
 typedef struct s_wall
@@ -174,20 +174,15 @@ typedef struct s_map
 	t_ele_flags	ele;
 }	t_map;
 
-/*	runtime	*/
 int				start(t_map *map_data);
 int				update_loop(void *p);
-
-/*	init	*/
 void			init_data_from_map(t_data *data, t_map *map_data);
 void			count_map_dimensions(char **map, int *rows, int *cols);
-
-/*	input	*/
 int				key_press(int key, void *p);
 int				key_release(int key, void *p);
 int				close_window(void *p);
 int				handle_mouse(int x, int y, void *param);
-	/*	drawing	*/
+/*	drawing	*/
 void			init_player_pos(t_data *data);
 void			draw_3d(t_data *d, int x);
 void			draw_minimap(t_data *d);
@@ -216,7 +211,7 @@ void			skip_spaces(char *str, int *i);
 void			ft_ex_checker(char *str);
 
 /*	utils	*/
-void			print_error(char *error, int exitcode);
+void			print_error(char *error);
 void			set_vertical_hit(t_hit *hit, t_point x_int, double x_dist);
 
 /*	cleanup	*/
