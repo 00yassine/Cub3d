@@ -65,5 +65,7 @@ void	cleanup_map(t_map *map)
 		free(map->we_player);
 	if (map->ea_player)
 		free(map->ea_player);
+	if (map->all_content)
+		free_2d_array(map->all_content);
 	free(map);
 }

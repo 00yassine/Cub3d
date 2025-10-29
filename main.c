@@ -6,17 +6,17 @@
 /*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:35:46 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/29 08:53:27 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/29 08:56:56 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-int	count_lines(char *filename)
+int count_lines(char *filename)
 {
-	int		fd;
-	int		count;
-	char	*line;
+	int fd;
+	int count;
+	char *line;
 
 	count = 0;
 	line = NULL;
@@ -34,18 +34,18 @@ int	count_lines(char *filename)
 	return (count);
 }
 
-void	print_error(char *error)
+void print_error(char *error)
 {
 	printf("\033[31m%s", error);
 	exit(1);
 }
 
-char	**load_map_from_file(char *filename)
+char **load_map_from_file(char *filename)
 {
-	int		fd;
-	char	**map;
-	int		len;
-	char	*line;
+	int fd;
+	char **map;
+	int len;
+	char *line;
 
 	len = count_lines(filename);
 	if (len < 0)
@@ -68,10 +68,10 @@ char	**load_map_from_file(char *filename)
 	return (map);
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	char	**map;
-	t_map	*parsed_map;
+	char **map;
+	t_map *parsed_map;
 
 	if (ac != 2)
 		print_error("Error: the number of arguments is not valid");
@@ -79,6 +79,5 @@ int	main(int ac, char **av)
 	parsed_map = parce(map);
 	start(parsed_map);
 	cleanup_map(parsed_map);
-	free_2d_array(map);
 	return (0);
 }
