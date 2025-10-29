@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:42:03 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/29 16:25:37 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/29 17:58:13 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,8 +222,6 @@ void			set_vertical_hit(t_hit *hit, t_point x_int, double x_dist);
 
 /*	cleanup	*/
 void			cleanup_data(t_data *data);
-void			cleanup_map(t_map *map);
-void			free_2d_array(char **arr);
 
 /*	garbage collector	*/
 void			*gc_malloc(size_t size, int mode);
