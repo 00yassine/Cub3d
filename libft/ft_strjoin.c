@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 19:56:10 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/29 08:39:08 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:11:02 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *result;
-	int lens1;
-	int lens2;
+	char	*result;
+	int		lens1;
+	int		lens2;
 
 	lens1 = 0;
 	lens2 = 0;

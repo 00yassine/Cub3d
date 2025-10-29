@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 12:01:52 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/29 08:44:24 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:02:06 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void free_2d_array(char **arr)
+void	free_2d_array(char **arr)
 {
 	(void)arr;
-	return;
+	return ;
 }
 
-void cleanup_data(t_data *data)
+void	cleanup_data(t_data *data)
 {
-	int i;
+	int	i;
 
 	if (!data)
-		return;
+		return ;
 	if (data->mlx_ptr)
 	{
 		i = 0;
@@ -43,8 +43,8 @@ void cleanup_data(t_data *data)
 	gc_malloc(0, 0);
 }
 
-void cleanup_map(t_map *map)
+void	cleanup_map(t_map *map)
 {
 	(void)map;
-	return;
+	return ;
 }

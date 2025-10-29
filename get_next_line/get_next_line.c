@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:45:13 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/28 19:45:17 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:14:56 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *ft_joinfree(char *buffer, char *buff)
+char	*ft_joinfree(char *buffer, char *buff)
 {
-	char *result;
+	char	*result;
 
 	result = ft_strjoin(buffer, buff);
 	return (result);
 }
 
-char *ft_get_line(char *buffer)
+char	*ft_get_line(char *buffer)
 {
-	int i;
-	char *line;
+	int		i;
+	char	*line;
 
 	i = 0;
 	if (!buffer[i])
@@ -42,11 +42,11 @@ char *ft_get_line(char *buffer)
 	return (line);
 }
 
-char *ft_get_next(char *buffer)
+char	*ft_get_next(char *buffer)
 {
-	int i;
-	int j;
-	char *next;
+	int		i;
+	int		j;
+	char	*next;
 
 	i = 0;
 	j = 0;
@@ -66,10 +66,10 @@ char *ft_get_next(char *buffer)
 	return (next);
 }
 
-char *read_file(int fd, char *buffer)
+char	*read_file(int fd, char *buffer)
 {
-	char *dybuffer;
-	int i_re;
+	char	*dybuffer;
+	int		i_re;
 
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
@@ -87,15 +87,15 @@ char *read_file(int fd, char *buffer)
 		dybuffer[i_re] = 0;
 		buffer = ft_joinfree(buffer, dybuffer);
 		if (ft_strchr(buffer, '\n'))
-			break;
+			break ;
 	}
 	return (buffer);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char *buffer;
-	char *line;
+	static char	*buffer;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

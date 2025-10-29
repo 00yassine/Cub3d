@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 15:39:03 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/29 08:39:08 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:10:52 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int len;
-	unsigned int i;
-	char *result;
+	unsigned int	len;
+	unsigned int	i;
+	char			*result;
 
 	i = 0;
 	len = 0;

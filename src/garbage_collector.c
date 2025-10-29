@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 11:59:51 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/29 08:45:08 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:02:31 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	gc_free(void *ptr)
 				g_gc_head = current->next;
 			free(current->ptr);
 			free(current);
-			return;
+			return ;
 		}
 		prev = current;
 		current = current->next;
