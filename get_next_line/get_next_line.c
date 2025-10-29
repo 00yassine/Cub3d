@@ -3,28 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:45:13 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/24 15:45:45 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/28 19:45:17 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_joinfree(char *buffer, char *buff)
+char *ft_joinfree(char *buffer, char *buff)
 {
-	char	*result;
+	char *result;
 
 	result = ft_strjoin(buffer, buff);
-	free(buffer);
 	return (result);
 }
 
-char	*ft_get_line(char *buffer)
+char *ft_get_line(char *buffer)
 {
-	int		i;
-	char	*line;
+	int i;
+	char *line;
 
 	i = 0;
 	if (!buffer[i])
@@ -43,11 +42,11 @@ char	*ft_get_line(char *buffer)
 	return (line);
 }
 
-char	*ft_get_next(char *buffer)
+char *ft_get_next(char *buffer)
 {
-	int		i;
-	int		j;
-	char	*next;
+	int i;
+	int j;
+	char *next;
 
 	i = 0;
 	j = 0;
@@ -55,7 +54,6 @@ char	*ft_get_next(char *buffer)
 		i++;
 	if (!buffer[i])
 	{
-		free (buffer);
 		return (NULL);
 	}
 	next = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
@@ -65,18 +63,17 @@ char	*ft_get_next(char *buffer)
 	while (buffer[i])
 		next[j++] = buffer[i++];
 	next[j] = '\0';
-	free (buffer);
 	return (next);
 }
 
-char	*read_file(int fd, char *buffer)
+char *read_file(int fd, char *buffer)
 {
-	char	*dybuffer;
-	int		i_re;
+	char *dybuffer;
+	int i_re;
 
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
-	dybuffer = malloc(((size_t)BUFFER_SIZE + 1) * sizeof(char));
+	dybuffer = gc_malloc(((size_t)BUFFER_SIZE + 1) * sizeof(char), 1);
 	if (!dybuffer)
 		return (NULL);
 	i_re = 1;
@@ -85,23 +82,20 @@ char	*read_file(int fd, char *buffer)
 		i_re = read(fd, dybuffer, BUFFER_SIZE);
 		if (i_re == -1)
 		{
-			free (buffer);
-			free (dybuffer);
 			return (NULL);
 		}
 		dybuffer[i_re] = 0;
 		buffer = ft_joinfree(buffer, dybuffer);
 		if (ft_strchr(buffer, '\n'))
-			break ;
+			break;
 	}
-	free (dybuffer);
 	return (buffer);
 }
 
-char	*get_next_line(int fd)
+char *get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*line;
+	static char *buffer;
+	char *line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

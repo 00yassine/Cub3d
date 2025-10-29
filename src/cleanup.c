@@ -3,38 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 12:01:52 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/25 17:39:07 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/29 08:44:24 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	free_2d_array(char **arr)
+void free_2d_array(char **arr)
 {
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
+	(void)arr;
+	return;
 }
 
-void	cleanup_data(t_data *data)
+void cleanup_data(t_data *data)
 {
-	int	i;
+	int i;
 
 	if (!data)
-		return ;
-	if (data->map)
-		free_2d_array(data->map);
+		return;
 	if (data->mlx_ptr)
 	{
 		i = 0;
@@ -51,19 +40,11 @@ void	cleanup_data(t_data *data)
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
+	gc_malloc(0, 0);
 }
 
-void	cleanup_map(t_map *map)
+void cleanup_map(t_map *map)
 {
-	if (!map)
-		return ;
-	if (map->no_player)
-		free(map->no_player);
-	if (map->so_player)
-		free(map->so_player);
-	if (map->we_player)
-		free(map->we_player);
-	if (map->ea_player)
-		free(map->ea_player);
-	free(map);
+	(void)map;
+	return;
 }

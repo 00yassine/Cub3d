@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:04:11 by ykabili-          #+#    #+#             */
-/*   Updated: 2024/10/28 20:17:02 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/29 08:41:21 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-static int	is_in_set(const char *set, char c)
+static int is_in_set(const char *set, char c)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (set[i])
@@ -25,12 +26,12 @@ static int	is_in_set(const char *set, char c)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char *ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
-	int		j;
-	int		z;
-	char	*result;
+	int i;
+	int j;
+	int z;
+	char *result;
 
 	z = 0;
 	j = ft_strlen(s1);
@@ -40,7 +41,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	j--;
 	while (j >= i && is_in_set(set, s1[j]))
 		j--;
-	result = (char *)malloc(sizeof(char) * (j - i + 2));
+	result = (char *)gc_malloc(sizeof(char) * (j - i + 2), 1);
 	if (!result)
 		return (NULL);
 	while (i <= j)
