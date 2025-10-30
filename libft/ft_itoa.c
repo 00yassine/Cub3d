@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:34:33 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/30 09:09:27 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/30 10:28:56 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int ft_find_len(int nbr)
+static int	ft_find_len(int nbr)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (nbr <= 0)
@@ -27,11 +27,11 @@ static int ft_find_len(int nbr)
 	return (len);
 }
 
-char *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	long nb;
-	char *result;
-	int len;
+	long	nb;
+	char	*result;
+	int		len;
 
 	nb = n;
 	len = ft_find_len(n);
