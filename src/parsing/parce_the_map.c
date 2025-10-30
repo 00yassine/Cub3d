@@ -34,6 +34,21 @@ static void	update_element_count(t_map *map_stu, char *line)
 		map_stu->ele.c += 1;
 }
 
+void	check_other_element(char *line)
+{
+	if (line[0] != 'F'
+		&& line[0] != 'N'
+		&& line[0] != 'S'
+		&& line[0] != 'W'
+		&& line[0] != 'E'
+		&& line[0] != 'C'
+		&& line[0] != '0'
+		&& line[0] != '1'
+		&& line[0] != '\n'
+		&& line[0] != '\0')
+		print_error("⚠️Error⚠️\n");
+}
+
 int	check_map_structer(t_map *map_stu, char **map)
 {
 	int	i;
@@ -47,6 +62,7 @@ int	check_map_structer(t_map *map_stu, char **map)
 				|| (map[i][j] >= 9 && map[i][j] <= 13)))
 			j++;
 		update_element_count(map_stu, map[i] + j);
+		check_other_element(map[i] + j);
 		i++;
 	}
 	return (map_stu->ele.no * map_stu->ele.so

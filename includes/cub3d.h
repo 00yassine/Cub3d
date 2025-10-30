@@ -6,7 +6,7 @@
 /*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:42:03 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/30 10:53:07 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/30 18:01:04 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ typedef struct s_hit
 	double	hit_y;
 	int		is_vertical;
 	int		tex_id;
-	double	ay_angle;
+	double	ray_angle;
 }	t_hit;
 
 typedef struct s_wall
