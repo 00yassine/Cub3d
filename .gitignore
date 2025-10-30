@@ -6,7 +6,9 @@ cub3d
 *.swp
 *.tmp
 *.log
-
+*.html
+*.md
+*.svg
 # Libft build outputs
 libft/*.o
 libft/*.a
@@ -20,6 +22,3 @@ libft/*.a
 test*
 # Cache
 __pycache__/
-function_info.md
-raycasting_flowchart.html
-raycasting_flowchart.svg
