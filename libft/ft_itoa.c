@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:34:33 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/29 16:03:50 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/30 09:09:27 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_find_len(int nbr)
+static int ft_find_len(int nbr)
 {
-	int	len;
+	int len;
 
 	len = 0;
 	if (nbr <= 0)
@@ -27,15 +27,15 @@ static int	ft_find_len(int nbr)
 	return (len);
 }
 
-char	*ft_itoa(int n)
+char *ft_itoa(int n)
 {
-	long	nb;
-	char	*result;
-	int		len;
+	long nb;
+	char *result;
+	int len;
 
 	nb = n;
 	len = ft_find_len(n);
-	result = (char *)gc_malloc(sizeof(char) * (len + 1), 1);
+	result = (char *)gc_malloc(sizeof(char) * (len + 1));
 	if (!result)
 		return (NULL);
 	result[len] = '\0';

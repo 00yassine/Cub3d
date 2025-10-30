@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 11:59:51 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/29 16:03:23 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/30 09:09:27 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void *ft_calloc(size_t count, size_t size)
 {
-	char	*ptr;
+	char *ptr;
 
 	if (size == 0 || count == 0)
-		return (gc_malloc(0, 1));
+		return (gc_malloc(1));
 	if (size != 0 && (count > SIZE_MAX / size))
 		return (NULL);
-	ptr = (char *)gc_malloc(count * size, 1);
+	ptr = (char *)gc_malloc(count * size);
 	if (!ptr)
 		return (NULL);
 	ft_bzero(ptr, count * size);

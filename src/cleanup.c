@@ -6,20 +6,20 @@
 /*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 12:01:52 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/29 17:58:59 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/30 09:16:32 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static t_gc_node	*g_gc_head = NULL;
+static t_gc_node *g_gc_head = NULL;
 
-void	cleanup_data(t_data *data)
+void cleanup_data(t_data *data)
 {
-	int	i;
+	int i;
 
 	if (!data)
-		return ;
+		return;
 	if (data->mlx_ptr)
 	{
 		i = 0;
@@ -36,19 +36,14 @@ void	cleanup_data(t_data *data)
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
-	gc_malloc(0, 0);
+	gc_free_all();
 }
 
-void	*gc_malloc(size_t size, int mode)
+void *gc_malloc(size_t size)
 {
-	void		*ptr;
-	t_gc_node	*new_node;
+	void *ptr;
+	t_gc_node *new_node;
 
-	if (mode == 0)
-	{
-		gc_free_all();
-		return (NULL);
-	}
 	ptr = malloc(size);
 	if (!ptr)
 		return (NULL);
@@ -63,11 +58,10 @@ void	*gc_malloc(size_t size, int mode)
 	g_gc_head = new_node;
 	return (ptr);
 }
-
-void	gc_free(void *ptr)
+void gc_free(void *ptr)
 {
-	t_gc_node	*current;
-	t_gc_node	*prev;
+	t_gc_node *current;
+	t_gc_node *prev;
 
 	current = g_gc_head;
 	prev = NULL;
@@ -81,17 +75,17 @@ void	gc_free(void *ptr)
 				g_gc_head = current->next;
 			free(current->ptr);
 			free(current);
-			return ;
+			return;
 		}
 		prev = current;
 		current = current->next;
 	}
 }
 
-void	gc_free_all(void)
+void gc_free_all(void)
 {
-	t_gc_node	*current;
-	t_gc_node	*next;
+	t_gc_node *current;
+	t_gc_node *next;
 
 	current = g_gc_head;
 	while (current)

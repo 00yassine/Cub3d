@@ -20,3 +20,6 @@ libft/*.a
 test*
 # Cache
 __pycache__/
+function_info.md
+raycasting_flowchart.html
+raycasting_flowchart.svg

@@ -17,30 +17,29 @@ SRC = main.c \
 	src/parsing/parsing_helper.c \
 	src/parsing/parsing_helper2.c \
 	src/parsing/checking_map.c \
-	src/raycasting/start.c \
-	src/raycasting/src/1_init.c \
-	src/raycasting/src/2_draw_2D_map.c \
-	src/raycasting/src/3_draw_player.c \
-	src/raycasting/src/4_input.c \
-	src/raycasting/src/5_update_player_pos.c \
-	src/raycasting/src/6_get_distance.c \
-	src/raycasting/src/7_draw_3d.c \
-	src/raycasting/src/7_1_draw_helpers.c \
-	src/raycasting/src/9_utils.c \
+	src/raycasting/raycasting_entry.c \
+	src/raycasting/src/init.c \
+	src/raycasting/src/draw_minimap.c \
+	src/raycasting/src/init_player.c \
+	src/raycasting/src/input.c \
+	src/raycasting/src/update_loop.c \
+	src/raycasting/src/raycasting.c \
+	src/raycasting/src/draw_3d.c \
+	src/raycasting/src/draw_helpers.c \
+	src/raycasting/src/utils.c \
 	src/cleanup.c \
-	src/raycasting/src/2.1_draw_2D_map.c \
 	src/parsing/extention_checker.c
 
-all: $(LIBFT) mlx $(NAME)
+all: $(NAME)
 
-mlx:
+$(NAME): $(LIBFT) $(MLX_DIR)/libmlx.a $(SRC)
+	$(CC) $(CFLAGS) -Iincludes -I$(MLX_DIR) $(SRC) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+
+$(MLX_DIR)/libmlx.a:
 	make -C $(MLX_DIR)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
-
-$(NAME): $(SRC) $(LIBFT)
-	$(CC) $(CFLAGS) -Iincludes -I$(MLX_DIR) $(SRC) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	make -C $(LIBFT_DIR) clean
@@ -52,4 +51,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re mlx
+.PHONY: all clean fclean re

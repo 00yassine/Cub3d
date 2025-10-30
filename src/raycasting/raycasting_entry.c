@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start.c                                            :+:      :+:    :+:   */
+/*   raycasting_entry.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:22:00 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/14 10:22:21 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/30 08:37:45 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	start(t_map *map_data)
+int	raycasting_entry(t_map *map_data)
 {
 	t_data	d;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   9_utils.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:27:33 by ykabili-          #+#    #+#             */
-/*   Updated: 2025/10/29 17:56:45 by elkharti         ###   ########.fr       */
+/*   Updated: 2025/10/30 08:39:47 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ void	set_vertical_hit(t_hit *hit, t_point x_int, double x_dist)
 	hit->hit_y = x_int.y;
 	hit->dist = x_dist;
 	hit->is_vertical = 1;
+}
+
+void	my_mlx_pixel_put_minimap(t_data *d, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || y < 0 || x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT)
+		return ;
+	dst = d->img_adr + (y * d->line_len + x * (d->bpp / 8));
+	*(unsigned int *)dst = color;
 }

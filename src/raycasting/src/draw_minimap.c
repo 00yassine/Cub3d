@@ -12,22 +12,12 @@
 
 #include "../../../includes/cub3d.h"
 
-#define MINIMAP_SIZE		300
-#define PLAYER_SIZE			8
-#define MINIMAP_OFFSET_X	10
-#define MINIMAP_OFFSET_Y	10
-#define TILE_SIZE			64
-#define SCALE_FACTOR		4.0
-
-void	my_mlx_pixel_put_minimap(t_data *d, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x < 0 || y < 0 || x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT)
-		return ;
-	dst = d->img_adr + (y * d->line_len + x * (d->bpp / 8));
-	*(unsigned int *)dst = color;
-}
+#define MINIMAP_SIZE 300
+#define PLAYER_SIZE 8
+#define MINIMAP_OFFSET_X 10
+#define MINIMAP_OFFSET_Y 10
+#define TILE_SIZE 64
+#define SCALE_FACTOR 4.0
 
 static void	draw_square(t_data *d, t_draw_minimap *m)
 {
@@ -41,9 +31,7 @@ static void	draw_square(t_data *d, t_draw_minimap *m)
 		while (j < m->cell)
 		{
 			my_mlx_pixel_put_minimap(d,
-				(int)(m->tile_x + j),
-				(int)(m->tile_y + i),
-				m->color);
+				(int)(m->tile_x + j), (int)(m->tile_y + i), m->color);
 			j++;
 		}
 		i++;
@@ -91,6 +79,28 @@ static void	draw_minimap_cell(t_data *d, t_draw_minimap *m)
 	draw_square(d, m);
 }
 
+void	draw_player_mini(t_data *d)
+{
+	int	i;
+	int	j;
+	int	cx;
+	int	cy;
+
+	cx = MINIMAP_OFFSET_X + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2;
+	cy = MINIMAP_OFFSET_Y + MINIMAP_SIZE / 2 - PLAYER_SIZE / 2;
+	i = 0;
+	while (i < PLAYER_SIZE)
+	{
+		j = 0;
+		while (j < PLAYER_SIZE)
+		{
+			my_mlx_pixel_put_minimap(d, cx + j, cy + i, 0xFF0000);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	draw_minimap(t_data *d)
 {
 	t_draw_minimap	mini;
@@ -106,10 +116,10 @@ void	draw_minimap(t_data *d)
 		{
 			mini.map_x = mini.x * TILE_SIZE;
 			mini.map_y = mini.y * TILE_SIZE;
-			mini.tile_x = (mini.map_x - mini.player_x) / SCALE_FACTOR
-				+ MINIMAP_OFFSET_X + MINIMAP_SIZE / 2;
-			mini.tile_y = (mini.map_y - mini.player_y) / SCALE_FACTOR
-				+ MINIMAP_OFFSET_Y + MINIMAP_SIZE / 2;
+			mini.tile_x = (mini.map_x - mini.player_x)
+				/ SCALE_FACTOR + MINIMAP_OFFSET_X + MINIMAP_SIZE / 2;
+			mini.tile_y = (mini.map_y - mini.player_y)
+				/ SCALE_FACTOR + MINIMAP_OFFSET_Y + MINIMAP_SIZE / 2;
 			draw_minimap_cell(d, &mini);
 		}
 	}

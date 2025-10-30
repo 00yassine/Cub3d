@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1_init.c                                           :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elkharti <elkharti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:29:41 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/29 15:44:24 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/30 09:09:28 by elkharti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-static char	**fill_map_array(char **map,
-				char **all_content, int start, int count);
+static char **fill_map_array(char **map,
+							 char **all_content, int start, int count);
 
-char	**extract_map_from_parsed_data(char **all_content)
+char **extract_map_from_parsed_data(char **all_content)
 {
-	int		i;
-	int		start;
-	int		count;
-	char	**map;
+	int i;
+	int start;
+	int count;
+	char **map;
 
 	i = 0;
 	start = -1;
@@ -37,16 +37,16 @@ char	**extract_map_from_parsed_data(char **all_content)
 	}
 	if (count == 0 || start == -1)
 		return (NULL);
-	map = gc_malloc(sizeof(char *) * (count + 1), 1);
+	map = gc_malloc(sizeof(char *) * (count + 1));
 	if (!map)
 		return (NULL);
 	return (fill_map_array(map, all_content, start, count));
 }
 
-static char	**fill_map_array(char **map,
-							char **all_content, int start, int count)
+static char **fill_map_array(char **map,
+							 char **all_content, int start, int count)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (i < count)
@@ -62,9 +62,9 @@ static char	**fill_map_array(char **map,
 	return (map);
 }
 
-void	count_map_dimensions(char **map, int *rows, int *cols)
+void count_map_dimensions(char **map, int *rows, int *cols)
 {
-	int	len;
+	int len;
 
 	*rows = 0;
 	*cols = 0;
@@ -79,45 +79,45 @@ void	count_map_dimensions(char **map, int *rows, int *cols)
 	}
 }
 
-void	init_textures(t_data *d, t_map *m)
+void init_textures(t_data *d, t_map *m)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	d->tex[TEX_NORTH].img = mlx_xpm_file_to_image(d->mlx_ptr,
-			m->no_player, &d->tex[TEX_NORTH].width,
-			&d->tex[TEX_NORTH].height);
+												  m->no_player, &d->tex[TEX_NORTH].width,
+												  &d->tex[TEX_NORTH].height);
 	d->tex[TEX_SOUTH].img = mlx_xpm_file_to_image(d->mlx_ptr,
-			m->so_player, &d->tex[TEX_SOUTH].width,
-			&d->tex[TEX_SOUTH].height);
+												  m->so_player, &d->tex[TEX_SOUTH].width,
+												  &d->tex[TEX_SOUTH].height);
 	d->tex[TEX_EAST].img = mlx_xpm_file_to_image(d->mlx_ptr,
-			m->ea_player, &d->tex[TEX_EAST].width,
-			&d->tex[TEX_EAST].height);
+												 m->ea_player, &d->tex[TEX_EAST].width,
+												 &d->tex[TEX_EAST].height);
 	d->tex[TEX_WEST].img = mlx_xpm_file_to_image(d->mlx_ptr,
-			m->we_player, &d->tex[TEX_WEST].width,
-			&d->tex[TEX_WEST].height);
+												 m->we_player, &d->tex[TEX_WEST].width,
+												 &d->tex[TEX_WEST].height);
 	while (i < 4)
 	{
 		d->tex[i].addr = mlx_get_data_addr(d->tex[i].img, &d->tex[i].bpp,
-				&d->tex[i].line_len, &d->endian);
+										   &d->tex[i].line_len, &d->endian);
 		i++;
 	}
 }
 
-void	init_data_from_map(t_data *data, t_map *map_data)
+void init_data_from_map(t_data *data, t_map *map_data)
 {
 	data->map = extract_map_from_parsed_data(map_data->all_content);
 	if (!data->map)
-		return ;
+		return;
 	count_map_dimensions(data->map, &data->rows, &data->cols);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr,
-			SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
+								   SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	data->floor = map_data->floor;
 	data->ceiling = map_data->ceiling;
 	data->img = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->img_adr = mlx_get_data_addr(data->img,
-			&data->bpp, &data->line_len, &data->endian);
+									  &data->bpp, &data->line_len, &data->endian);
 	init_player_pos(data);
 	data->speed = 1;
 	data->input = (t_input){0, 0, 0, 0, 0, 0};
