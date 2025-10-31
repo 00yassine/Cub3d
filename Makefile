@@ -28,7 +28,8 @@ SRC = main.c \
 	src/raycasting/src/draw_helpers.c \
 	src/raycasting/src/utils.c \
 	src/cleanup.c \
-	src/parsing/extention_checker.c
+	src/parsing/extention_checker.c \
+	src/parsing/helper.c
 
 all: $(NAME)
 

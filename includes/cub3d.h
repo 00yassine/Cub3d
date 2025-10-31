@@ -6,7 +6,7 @@
 /*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:42:03 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/30 18:01:04 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/31 10:53:21 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,8 @@ int				ft_atoi_skip(char *str, int *i);
 char			*ft_str_take(char *line, int i);
 void			skip_spaces(char *str, int *i);
 void			ft_ex_checker(char *str);
+void			fill_player_str(t_map *map_list);
+int				check_map_structer(t_map *map_stu, char **map);
 
 /*	utils	*/
 void			print_error(char *error);
