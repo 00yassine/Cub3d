@@ -34,19 +34,32 @@ static void	update_element_count(t_map *map_stu, char *line)
 		map_stu->ele.c += 1;
 }
 
-void	check_other_element(char *line)
+static void	check_is_valid_element(char *line)
 {
-	if (line[0] != 'F'
-		&& line[0] != 'N'
-		&& line[0] != 'S'
-		&& line[0] != 'W'
-		&& line[0] != 'E'
-		&& line[0] != 'C'
-		&& line[0] != '0'
-		&& line[0] != '1'
-		&& line[0] != '\n'
-		&& line[0] != '\0')
-		print_error("⚠️Error⚠️\n");
+	if (!line || !*line || line[0] == '\n')
+		return ;
+	if (ft_strncmp(line, "NO ", 3) == 0
+		|| ft_strncmp(line, "NO\t", 3) == 0)
+		return ;
+	else if (ft_strncmp(line, "SO ", 3) == 0
+		|| ft_strncmp(line, "SO\t", 3) == 0)
+		return ;
+	else if (ft_strncmp(line, "WE ", 3) == 0
+		|| ft_strncmp(line, "WE\t", 3) == 0)
+		return ;
+	else if (ft_strncmp(line, "EA ", 3) == 0
+		|| ft_strncmp(line, "EA\t", 3) == 0)
+		return ;
+	else if (ft_strncmp(line, "F ", 2) == 0
+		|| ft_strncmp(line, "F\t", 2) == 0)
+		return ;
+	else if (ft_strncmp(line, "C ", 2) == 0
+		|| ft_strncmp(line, "C\t", 2) == 0)
+		return ;
+	else if (line[0] == '1' || line[0] == '0' || line[0] == '\0')
+		return ;
+	else
+		print_error("⚠️   Error   ⚠️\n");
 }
 
 int	check_map_structer(t_map *map_stu, char **map)
@@ -61,8 +74,8 @@ int	check_map_structer(t_map *map_stu, char **map)
 		while (map[i][j] && (map[i][j] == ' '
 				|| (map[i][j] >= 9 && map[i][j] <= 13)))
 			j++;
+		check_is_valid_element(map[i] + j);
 		update_element_count(map_stu, map[i] + j);
-		check_other_element(map[i] + j);
 		i++;
 	}
 	return (map_stu->ele.no * map_stu->ele.so
@@ -83,17 +96,17 @@ void	fill_player_str(t_map *map_list)
 		while (map[i][j] && (map[i][j] == ' '
 				|| (map[i][j] >= 9 && map[i][j] <= 13)))
 			j++;
-		if (ft_strncmp(map[i] + j, "NO ", 3) == 0)
+		if (ft_strncmp(map[i] + j, "NO ", 3) == 0 || ft_strncmp(map[i] + j, "NO\t", 3) == 0)
 			map_list->no_player = ft_str_take(map[i] + j, 3);
-		else if (ft_strncmp(map[i] + j, "SO ", 3) == 0)
+		else if (ft_strncmp(map[i] + j, "SO ", 3) == 0 || ft_strncmp(map[i] + j, "SO\t", 3) == 0)
 			map_list->so_player = ft_str_take(map[i] + j, 3);
-		else if (ft_strncmp(map[i] + j, "WE ", 3) == 0)
+		else if (ft_strncmp(map[i] + j, "WE ", 3) == 0 || ft_strncmp(map[i] + j, "WE\t", 3) == 0)
 			map_list->we_player = ft_str_take(map[i] + j, 3);
-		else if (ft_strncmp(map[i] + j, "EA ", 3) == 0)
+		else if (ft_strncmp(map[i] + j, "EA ", 3) == 0 || ft_strncmp(map[i] + j, "EA\t", 3) == 0)
 			map_list->ea_player = ft_str_take(map[i] + j, 3);
-		else if (ft_strncmp(map[i] + j, "F ", 2) == 0)
+		else if (ft_strncmp(map[i] + j, "F ", 2) == 0 || ft_strncmp(map[i] + j, "F\t", 2) == 0)
 			map_list->floor = ft_nb_take(map[i] + j, 2);
-		else if (ft_strncmp(map[i] + j, "C ", 2) == 0)
+		else if (ft_strncmp(map[i] + j, "C ", 2) == 0 || ft_strncmp(map[i] + j, "C\t", 2) == 0)
 			map_list->ceiling = ft_nb_take(map[i] + j, 2);
 		i++;
 	}
@@ -107,7 +120,7 @@ t_map	*parce(char **map)
 	struct_initializer(map_list);
 	map_list->all_content = map;
 	if (check_map_structer(map_list, map_list->all_content) != 1)
-		print_error("⚠️Error⚠️\n");
+		print_error("⚠️   Error   ⚠️\n");
 	fill_player_str(map_list);
 	validate_map(map_list);
 	return (map_list);
