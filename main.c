@@ -6,7 +6,7 @@
 /*   By: ykabili- <ykabili-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:35:46 by elkharti          #+#    #+#             */
-/*   Updated: 2025/10/30 10:26:49 by ykabili-         ###   ########.fr       */
+/*   Updated: 2025/10/31 12:17:56 by ykabili-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		print_error("Error: the number of arguments is not valid");
+	ft_ex_checker(av[1]);
 	map = load_map_from_file(av[1]);
 	parsed_map = parce(map);
 	raycasting_entry(parsed_map);
